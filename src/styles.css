@@ -1938,21 +1938,33 @@ img {
   transform: scale(0.94);
 }
 
-/* Three tabs do not fit at 375px with the two-tab type size. */
+/* More than two tabs do not fit at 375px with the two-tab type size. */
 .toptabs.tight .toptab {
-  font-size: 12px;
-  letter-spacing: 0.04em;
+  font-size: 11.5px;
+  letter-spacing: 0.02em;
   display: inline-flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: center;
-  gap: 5px;
+  gap: 4px;
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
+/* The put-down pile is an icon, so it takes a fixed sliver and leaves the rest to the
+   three named tabs, which need every pixel at 375px. */
+.toptab.icononly {
+  flex: 0 0 58px;
+}
+
+.toptab.icononly svg {
+  opacity: 0.85;
 }
 
 .toptab-count {
   font-size: 11px;
   font-weight: 800;
   letter-spacing: 0;
-  padding: 1px 6px;
+  padding: 1px 5px;
   border-radius: 999px;
   background: var(--line);
   color: var(--ink2);

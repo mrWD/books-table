@@ -1,7 +1,6 @@
 import { useEffect } from 'react'
 import { HashRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom'
-import ReadingPage from './pages/ReadingPage'
-import ShelfPage from './pages/ShelfPage'
+import LibraryPage from './pages/LibraryPage'
 import ExplorePage from './pages/ExplorePage'
 import BookDetailPage from './pages/BookDetailPage'
 import ProfilePage from './pages/ProfilePage'
@@ -31,9 +30,14 @@ function Shell() {
   }, [])
 
   useEffect(() => {
-    // Group detail routes so the counter stays a handful of screens, not per-title.
+    // Group the parameterised routes so the counter stays a handful of screens rather
+    // than one row per title or per library tab.
     const path = location.pathname
-    const key = path.startsWith('/book/') ? '/book' : path
+    const key = path.startsWith('/book/')
+      ? '/book'
+      : path.startsWith('/library')
+        ? '/library'
+        : path
     useStats.getState().recordRoute(key)
   }, [location.pathname])
 
@@ -42,14 +46,17 @@ function Shell() {
       <ScrollToTop />
       <InstallHint />
       <Routes>
-        <Route path="/" element={<Navigate to="/reading" replace />} />
-        <Route path="/reading" element={<ReadingPage />} />
-        <Route path="/shelf" element={<ShelfPage />} />
+        <Route path="/" element={<Navigate to="/library/reading" replace />} />
+        <Route path="/library" element={<LibraryPage />} />
+        <Route path="/library/:tab" element={<LibraryPage />} />
+        {/* Addresses from before Reading and the shelf were merged. */}
+        <Route path="/reading" element={<Navigate to="/library/reading" replace />} />
+        <Route path="/shelf" element={<Navigate to="/library/to-read" replace />} />
         <Route path="/explore" element={<ExplorePage />} />
         <Route path="/book/:id" element={<BookDetailPage />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/insights" element={<InsightsPage />} />
-        <Route path="*" element={<Navigate to="/reading" replace />} />
+        <Route path="*" element={<Navigate to="/library/reading" replace />} />
       </Routes>
       <BottomNav />
       <SupportFab />

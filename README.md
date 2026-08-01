@@ -11,15 +11,17 @@ same stack, same local-first principles, a different domain.
 
 ## Features
 
-- **Reading** — books in progress, split into Continue, Not Started and Been a
-  While. A card shows the position (`p. 124 / 504`), the percentage and a one-tap
-  `+10` advance with Undo, plus a list/grid toggle.
+- **Library** — one screen, four tabs carrying their counts: Reading, To read,
+  Finished, and an icon tab for books put down unfinished. Reading splits into
+  Continue, Not Started and Been a While; a card shows the position
+  (`p. 124 / 504`), the percentage and a one-tap `+10` advance with Undo, plus a
+  list/grid toggle.
 - **Book page** — progress with quick `+10 / +25 / +50` steps or an exact page,
   a page count you can correct for your own edition, your own 1–5 rating, and
   Start reading / Give up / Read again / Remove.
-- **Shelf** — three tabs carrying their counts: To read, Finished, Gave up.
-  START asks whether you've begun the book or already read it, then takes you to
-  the tab it moved to instead of leaving you to find it.
+- **START asks, then moves you** — on a To read row it opens a two-option sheet
+  ("I'm reading it now" / "I've already read it") and switches to the tab the book
+  landed on, instead of leaving you to find where it went.
 - **"For you" recommendations** — built on the device from what is on your
   shelves: the authors you finished and the subjects those books share. Finished
   books weigh more than a wish-list entry, anything already in the library is
@@ -90,7 +92,7 @@ src/lib/        types, the Open Library client, subject vocabulary, formatting
 src/store/      zustand: library and cache (persist), explore, recommend, theme, ui
                 selectors.ts — all derived logic as pure functions
 src/components/ icons, UI primitives, cards
-src/pages/      Reading / Shelf / Explore / BookDetail / Profile / Insights
+src/pages/      Library / Explore / BookDetail / Profile / Insights
 ```
 
 ## Documentation

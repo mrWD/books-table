@@ -50,6 +50,20 @@ export const IconShelf = (p: IconProps) =>
 export const IconBookmark = (p: IconProps) =>
   svg(<path d="M6.5 3.5h11v17l-5.5-4-5.5 4z" />, p)
 
+/*
+ * The pile you started and put down. A pause, not a crossed-out book: at the 17px the
+ * tab bar gives it, a book silhouette with a stroke through it renders as an empty
+ * rectangle with a line on it — checked, and it said nothing. Two bars survive any size,
+ * and they pair with the row's AGAIN button.
+ */
+export const IconPaused = (p: IconProps) =>
+  svg(
+    <>
+      <path d="M9 5v14M15 5v14" strokeWidth={2.6} />
+    </>,
+    p,
+  )
+
 export const IconSearch = (p: IconProps) =>
   svg(
     <>

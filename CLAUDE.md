@@ -50,11 +50,14 @@ Worth running:
 - search in all three scopes (ALL / TITLE / AUTHOR) for `dune`, `Булгаков`,
   `atomic habits` — the first two caught real bugs in the source layer;
 - the whole entry path, which is what people got lost in: Explore → `+` → the
-  toast's START READING must land on the Reading tab; Shelf → START must open the
-  two-option sheet, and choosing "I'm reading it now" must also land on Reading;
+  toast's START READING must switch to the Reading tab; Library → TO READ → START
+  must open the two-option sheet, and choosing "I'm reading it now" must switch to
+  Reading with the counts updated;
+- the old addresses `/#/reading` and `/#/shelf` must still land somewhere sensible;
 - add a book, start it, tap `+10` from the card and `+25` from the detail page,
   then Undo;
-- the three Shelf tabs at 375px — the counts must fit on one line each;
+- the four Library tabs at 375px — the three named ones must keep their counts
+  on one line, and the fourth is an icon;
 - set an exact page past the end — it must finish the book, and correcting it
   back below the end must reopen it;
 - the genre strip on Explore (the results must not be all public-domain
@@ -77,12 +80,19 @@ Worth running:
   fact. Every time estimate in the app derives from it.
 - **Quick advance is `+10`, and the button says so.** A book has no discrete
   "next episode", so a one-tap control has to state how far it moves you.
-- **A status change that moves a book between tabs must navigate there.** Every
-  silent version of this failed the same way in review: the book vanished from
-  the list in front of you and you had to guess which tab now held it. Shelf →
-  START asks what happened rather than assuming, then takes you to Reading.
-- **The Shelf tabs carry counts.** Three piles, and until the tab said how big
-  each was, finding a book meant opening all three.
+- **One library screen, four tabs.** Reading and the shelf were separate screens
+  and the bottom navigation had an entry for each, which put the same list in two
+  places; a book that changed status left one of them without saying which. The
+  tabs are `reading / to-read / finished / stopped`, addressable as
+  `/#/library/<tab>` so a status change can switch to the tab the book landed on.
+- **The fourth tab is an icon.** Books put down unfinished are a real pile but not
+  worth a quarter of a 375px tab bar, so it is a glyph plus its count.
+- **A status change that moves a book between tabs must switch to it.** Every
+  silent version failed the same way in review: the book vanished from the list in
+  front of you and you had to guess where it went. START asks what happened rather
+  than assuming, then moves you.
+- **The tabs carry counts.** Until the tab said how big each pile was, finding a
+  book meant opening all of them.
 - **Genre browsing uses search, not `/subjects/`.** See DATA-SOURCES — the
   subjects endpoint returns the same classics for every genre.
 - **Google Books is not used.** Keyless it returns HTTP 429 with a zero quota, so

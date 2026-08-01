@@ -38,7 +38,7 @@ const SHELVES: { label: string; status: ShelfStatus }[] = [
   { label: 'Reading', status: 'reading' },
   { label: 'Want to read', status: 'want' },
   { label: 'Finished', status: 'read' },
-  { label: 'Gave up', status: 'dropped' },
+  { label: 'Paused', status: 'dropped' },
 ]
 
 export default function ProfilePage() {

@@ -13,8 +13,8 @@ import {
   IconBook,
   IconBookmark,
   IconCheck,
+  IconPaused,
   IconPlay,
-  IconStop,
   IconTrash,
 } from '../components/Icons'
 import { ReadOnline } from '../components/ReadOnline'
@@ -158,7 +158,7 @@ export default function BookDetailPage() {
                 {total ? `${page} / ${total} pages` : `page ${page}`}
               </span>
               {tracked.status === 'want' && <Badge variant="black">WANT TO READ</Badge>}
-              {tracked.status === 'dropped' && <Badge variant="black">GAVE UP</Badge>}
+              {tracked.status === 'dropped' && <Badge variant="black">PAUSED</Badge>}
               {tracked.status === 'read' && <Badge variant="green">FINISHED</Badge>}
               {tracked.status === 'reading' && total ? (
                 <Badge variant="accent">{percent}%</Badge>
@@ -307,10 +307,10 @@ export default function BookDetailPage() {
                   className="textbtn"
                   onClick={() => {
                     setStatus(id, 'dropped')
-                    showToast(`Gave up on ${book.title}`, () => setStatus(id, 'reading'))
+                    showToast(`Paused ${book.title}`, () => setStatus(id, 'reading'))
                   }}
                 >
-                  <IconStop size={16} /> Give up
+                  <IconPaused size={16} strokeWidth={2.6} /> Stop reading
                 </button>
               )}
               {(tracked.status === 'dropped' || tracked.status === 'read') && (

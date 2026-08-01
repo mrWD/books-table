@@ -24,9 +24,13 @@ export function useNow(intervalMs = 60000): Date {
 
 // ---------- navigation ----------
 
+/**
+ * Three entries, not four. Reading used to be its own screen and the shelf another,
+ * which meant the same list existed in two places and a book that changed status left
+ * one of them without saying which. They are one screen with tabs now.
+ */
 const NAV = [
-  { to: '/reading', label: 'Reading', icon: IconBook },
-  { to: '/shelf', label: 'Shelf', icon: IconShelf },
+  { to: '/library', label: 'Library', icon: IconShelf },
   { to: '/explore', label: 'Explore', icon: IconSearch },
   { to: '/profile', label: 'Profile', icon: IconUser },
 ]
@@ -47,8 +51,13 @@ export function BottomNav() {
 }
 
 export interface Tab {
-  label: string
-  /** Shown next to the label. The point is that an empty shelf says so from the tab. */
+  key: string
+  label?: string
+  /** An icon instead of a label, for a pile that does not deserve a quarter of the bar. */
+  icon?: ReactNode
+  /** Accessible name — required when the tab is an icon. */
+  title?: string
+  /** Shown next to the label. The point is that an empty pile says so from the tab. */
   count?: number
 }
 
@@ -65,11 +74,13 @@ export function TopTabs({
     <div className={`toptabs${tabs.length > 2 ? ' tight' : ''}`}>
       {tabs.map((t) => (
         <button
-          key={t.label}
-          className={`toptab${t.label === active ? ' active' : ''}`}
-          onClick={() => onChange(t.label)}
+          key={t.key}
+          className={`toptab${t.key === active ? ' active' : ''}${t.icon ? ' icononly' : ''}`}
+          onClick={() => onChange(t.key)}
+          title={t.title}
+          aria-label={t.title}
         >
-          {t.label}
+          {t.icon ?? t.label}
           {t.count !== undefined && <span className="toptab-count">{t.count}</span>}
         </button>
       ))}

@@ -124,21 +124,21 @@ export function ShelfRow({ item, action }: { item: ShelfItem; action: 'start' | 
         {
           value: 'reading',
           label: action === 'start' ? "I'm reading it now" : 'Picking it up again',
-          hint: 'Opens Reading, where a tap logs the pages',
+          hint: 'Moves to the Reading tab, where a tap logs the pages',
           primary: true,
         },
         {
           value: 'read',
           label: action === 'start' ? "I've already read it" : 'I finished it',
-          hint: 'Straight to the Finished shelf',
+          hint: 'Straight to the Finished tab',
         },
       ],
     })
     if (!answer) return
     setStatus(book.id, answer === 'reading' ? 'reading' : 'read')
     if (answer === 'reading') {
-      // Land on the tab the book just moved to, rather than on the row's empty space.
-      navigate('/reading')
+      // Switch to the tab the book just moved to, rather than leaving a gap in the list.
+      navigate('/library/reading')
       showToast(`${book.title} is on your reading list`, () => setStatus(book.id, before))
     } else {
       showToast(`${book.title} marked as read`, () => setStatus(book.id, before))
@@ -279,7 +279,7 @@ export function AddBookButton({
               `${book.title} — on your shelf`,
               () => {
                 setStatus(book.id, 'reading')
-                navigate('/reading')
+                navigate('/library/reading')
               },
               'START READING',
             )

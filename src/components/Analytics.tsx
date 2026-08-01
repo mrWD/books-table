@@ -20,7 +20,11 @@ function onVercel(): boolean {
 function screenUrl(rawUrl: string): string {
   const url = new URL(rawUrl)
   const path = url.hash.replace(/^#/, '').split('?')[0] || '/'
-  const collapsed = path.startsWith('/book/') ? '/book' : path
+  const collapsed = path.startsWith('/book/')
+    ? '/book'
+    : path.startsWith('/library')
+      ? '/library'
+      : path
   return `${url.origin}${collapsed}`
 }
 

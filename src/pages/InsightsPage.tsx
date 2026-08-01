@@ -16,8 +16,7 @@ import { IconBack } from '../components/Icons'
  */
 
 const ROUTE_LABELS: Record<string, string> = {
-  '/reading': 'Reading',
-  '/shelf': 'Shelf',
+  '/library': 'Library',
   '/explore': 'Explore',
   '/profile': 'Profile',
   '/book': 'Book details',
@@ -176,7 +175,7 @@ export default function InsightsPage() {
         <Stat value={s.checkIns} label="CHECK-INS" />
         <Stat value={s.booksFinished} label="BOOKS FINISHED" />
         <Stat value={library.reading} label="READING" />
-        <Stat value={dropped} label="GAVE UP" />
+        <Stat value={dropped} label="PAUSED" />
       </div>
       <p className="chips-hint">
         Library: {library.pagesRead} pages ({formatBigDuration(library.minutes)}) ·{' '}

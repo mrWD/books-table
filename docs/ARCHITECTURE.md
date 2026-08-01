@@ -69,6 +69,21 @@ until every one had been re-fetched — and not at all offline. Descriptions are
 dropped from the backup: they are the largest field by far and are re-fetched on
 the detail page anyway.
 
+## One screen for the library
+
+`LibraryPage` holds every status behind four tabs — `reading`, `to-read`,
+`finished`, `stopped` — addressed as `/#/library/<tab>`. Reading and the shelf
+used to be separate screens with a bottom-nav entry each, which put the same list
+in two places and meant a status change moved a book out of the list in front of
+you and into somewhere you had to guess.
+
+Keeping the tab in the URL is what lets a status change land on it: `ShelfRow`
+navigates to `/library/reading` after "I'm reading it now", and the toast after
+adding from Explore does the same. Tab clicks themselves `replace`, so the back
+button leaves the tabs rather than walking through them.
+
+`/#/reading` and `/#/shelf` redirect, for links made before the merge.
+
 ## Reading buckets
 
 `buildReadingItems` splits `status === 'reading'` into three:
