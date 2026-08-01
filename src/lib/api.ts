@@ -152,6 +152,22 @@ export function mapSearchDoc(d: SearchDoc): BookSummary {
  */
 export type SearchScope = 'all' | 'title' | 'author'
 
+/**
+ * Unofficial study guides, "summaries" and workbooks written about a popular book.
+ * Searching a bestseller returns a wall of them — "SUMMARY and REVIEW: PROJECT HAIL
+ * MARY", "WorkBook For…" — because they are separate works with the same words in the
+ * title. They are real records, so they are pushed down rather than hidden.
+ */
+const DERIVATIVE = /\b(summary|summaries|analysis|analyses|workbook|study guide|studyguide|key takeaways|conversation starters|book club|quicklet|sidekick|trivia[- ]on[- ]books|companion (?:guide|workbook))\b/i
+
+function derivativeScore(book: BookSummary): number {
+  if (!DERIVATIVE.test(book.title)) return 0
+  // A genuine book whose title contains "Analysis" has a cover and a print history;
+  // the parasitic ones have neither. Both signals must agree before demoting.
+  const thin = !book.cover && (book.editionCount ?? 1) <= 2
+  return thin ? 2 : 1
+}
+
 export async function searchBooks(
   query: string,
   scope: SearchScope = 'all',
@@ -165,9 +181,15 @@ export async function searchBooks(
   const data = await getJson<{ numFound: number; docs: SearchDoc[] }>(url)
   stats.source('openlibrary')
   // Works with neither a cover nor an author are almost always catalogue debris.
-  return data.docs
+  const books = data.docs
     .filter((d) => d.title && (d.cover_i || (d.author_name?.length ?? 0) > 0))
     .map(mapSearchDoc)
+
+  // Stable: Open Library's own relevance decides everything except the demotion.
+  return books
+    .map((book, index) => ({ book, index, penalty: derivativeScore(book) }))
+    .sort((a, b) => a.penalty - b.penalty || a.index - b.index)
+    .map((r) => r.book)
 }
 
 /**
