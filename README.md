@@ -1,6 +1,7 @@
 # BooksTable
 
-**→ [mrwd.github.io/books-table](https://mrwd.github.io/books-table/)**
+**→ [books-table-six.vercel.app](https://books-table-six.vercel.app/)** ·
+mirror: [mrwd.github.io/books-table](https://mrwd.github.io/books-table/)
 
 A personal reading tracker. It runs on **Android, iPhone and the web** from a
 single codebase (a PWA), **with no backend for your data**: the library is stored
@@ -82,8 +83,15 @@ npm run build
 ## Deployment
 
 Static files only — routing is hash-based, so no SPA fallback is needed and the
-build ports to any host. `.github/workflows/deploy.yml` publishes to GitHub Pages
-on a push to `main`, with the subpath injected via `BASE_PATH`.
+build ports to any host. A push to `main` publishes twice: Vercel rebuilds
+<https://books-table-six.vercel.app/> from the root, and
+`.github/workflows/deploy.yml` publishes the GitHub Pages mirror with the subpath
+injected via `BASE_PATH`. That variable belongs to Pages alone — setting it on a
+root host would move every asset into a subpath that is not there.
+
+On a `.vercel.app` host the app also reports cookieless screen-view counts to
+Vercel Web Analytics: a screen name, never a title, a search term or an
+identifier. Everywhere else the component is inert.
 
 ## Layout
 

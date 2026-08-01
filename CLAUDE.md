@@ -21,8 +21,11 @@ and the one-tap episode check-in became a one-tap page advance.
 ## Core principles (break only with the owner's explicit consent)
 
 1. **No backend at all.** The library lives in the device's `localStorage`. No
-   accounts, no sync, no data collection. Unlike FilmTable there is not even a
-   proxy: Open Library needs no key.
+   accounts, no sync, nothing personal collected. Unlike FilmTable there is not
+   even a proxy: Open Library needs no key. The single exception is
+   `src/components/Analytics.tsx`: on a `.vercel.app` host it reports cookieless
+   screen-view counts to Vercel Web Analytics — a screen name, never a title, a
+   search term or an identifier.
 2. **The app must work without keys.** If a second source is ever added, it must
    not become a dependency — the keyless path has to keep working.
 3. **Its own visual identity.** Inherited from FilmTable, which was deliberately
@@ -107,10 +110,20 @@ Worth running:
 - Book *series* are not modelled. Open Library's series data is inconsistent, so
   a cycle like Dune is currently four independent entries.
 - Reading goals (books or pages per year) are not implemented.
-- Production is **<https://mrwd.github.io/books-table/>**, published by
-  `.github/workflows/deploy.yml` on a push to `main`. There is no Vercel
-  deployment; the inherited Analytics component only activates on a
-  `.vercel.app` host, so it is inert there.
+- Production is **<https://books-table-six.vercel.app/>** — the Vercel project
+  `books-table`, rebuilt on every push to `main` (Vite preset, no environment
+  variables: setting `BASE_PATH` there would push the assets into a subpath and
+  serve a blank page). The suffix exists because `books-table.vercel.app` is
+  taken by an unrelated app; renaming under Settings → Domains means updating
+  this line, `README.md` and the card in `mrWD/mrWD.github.io`.
+  <https://mrwd.github.io/books-table/> stays as a mirror on the same push, via
+  `.github/workflows/deploy.yml`, so PWAs already installed from it keep working.
+  Note that the two addresses are separate origins and therefore separate
+  `localStorage` — a library does not follow you across, the backup file does.
+- Vercel enabled Web Analytics on the project by itself, unlike its neighbours:
+  `/_vercel/insights/script.js` answers 200 and the app posts a view per screen.
+  On `games-table` the same path answered 404 until the component was ported
+  there.
 
 ## Tone with the owner
 

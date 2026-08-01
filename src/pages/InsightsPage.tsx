@@ -12,7 +12,9 @@ import { IconBack } from '../components/Icons'
 /**
  * Hidden diagnostics page (/insights) — not linked from the navigation.
  * Everything shown is computed on this device from counters that hold no
- * personal data: no search terms, no titles, no identifiers, nothing sent anywhere.
+ * personal data: no search terms, no titles, no identifiers. These counters are
+ * never uploaded; the hosted build reports only a cookieless screen-view count
+ * (see Analytics).
  */
 
 const ROUTE_LABELS: Record<string, string> = {
@@ -151,8 +153,8 @@ export default function InsightsPage() {
         <h1>Insights</h1>
       </div>
       <p className="chips-hint">
-        Counted on this device only. No search terms, no titles, no identifiers — nothing is
-        sent anywhere.
+        Counted on this device only. No search terms, no titles, no identifiers — these numbers
+        never leave it. The hosted version counts screen views, cookieless, and nothing else.
       </p>
 
       <h2 className="h2">Usage</h2>
