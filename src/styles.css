@@ -1937,3 +1937,75 @@ img {
 .startbtn:active {
   transform: scale(0.94);
 }
+
+/* Three tabs do not fit at 375px with the two-tab type size. */
+.toptabs.tight .toptab {
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 5px;
+}
+
+.toptab-count {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0;
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: var(--line);
+  color: var(--ink2);
+}
+
+.toptab.active .toptab-count {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+/* A choice between named outcomes, not a yes/no. Stacked so each option can carry the
+   line that says what will happen — including which tab you end up on. */
+.choices {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 14px 0 4px;
+}
+
+.choice {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  text-align: left;
+  width: 100%;
+  padding: 13px 15px;
+  border-radius: 14px;
+  background: var(--line);
+  color: var(--ink);
+  transition: transform 0.12s;
+}
+
+.choice:active {
+  transform: scale(0.985);
+}
+
+.choice.primary {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.choice-label {
+  font-weight: 800;
+  font-size: 15px;
+}
+
+.choice-hint {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--ink2);
+}
+
+.choice.primary .choice-hint {
+  color: color-mix(in srgb, var(--on-accent) 78%, transparent);
+}

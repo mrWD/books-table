@@ -20,13 +20,38 @@ interface ConfirmRequest {
   resolve: (ok: boolean) => void
 }
 
+/**
+ * A choice between named outcomes, as opposed to a yes/no confirm.
+ *
+ * It exists because a button that silently moves a book to another tab leaves the
+ * person to work out where it went. Asking what happened, and then taking them there,
+ * replaces two guesses with one answer.
+ */
+export interface ChoiceOption {
+  value: string
+  label: string
+  hint?: string
+  /** The expected answer, styled as the primary action. */
+  primary?: boolean
+}
+
+interface ChoiceRequest {
+  title: string
+  message?: string
+  options: ChoiceOption[]
+  resolve: (value: string | null) => void
+}
+
 interface UiState {
   toast: Toast | null
   confirmReq: ConfirmRequest | null
+  choiceReq: ChoiceRequest | null
   showToast: (message: string, undo?: () => void, actionLabel?: string) => void
   dismissToast: () => void
   askConfirm: (opts: Omit<ConfirmRequest, 'resolve'>) => Promise<boolean>
   answerConfirm: (ok: boolean) => void
+  askChoice: (opts: Omit<ChoiceRequest, 'resolve'>) => Promise<string | null>
+  answerChoice: (value: string | null) => void
 }
 
 let toastSeq = 0
@@ -35,6 +60,7 @@ let toastTimer: ReturnType<typeof setTimeout> | undefined
 export const useUi = create<UiState>((set, get) => ({
   toast: null,
   confirmReq: null,
+  choiceReq: null,
 
   showToast: (message, undo, actionLabel) => {
     if (toastTimer) clearTimeout(toastTimer)
@@ -56,6 +82,17 @@ export const useUi = create<UiState>((set, get) => ({
     const req = useUi.getState().confirmReq
     set({ confirmReq: null })
     req?.resolve(ok)
+  },
+
+  askChoice: (opts) =>
+    new Promise<string | null>((resolve) => {
+      set({ choiceReq: { ...opts, resolve } })
+    }),
+
+  answerChoice: (value) => {
+    const req = useUi.getState().choiceReq
+    set({ choiceReq: null })
+    req?.resolve(value)
   },
 }))
 

@@ -46,24 +46,31 @@ export function BottomNav() {
   )
 }
 
+export interface Tab {
+  label: string
+  /** Shown next to the label. The point is that an empty shelf says so from the tab. */
+  count?: number
+}
+
 export function TopTabs({
   tabs,
   active,
   onChange,
 }: {
-  tabs: string[]
+  tabs: Tab[]
   active: string
   onChange: (t: string) => void
 }) {
   return (
-    <div className="toptabs">
+    <div className={`toptabs${tabs.length > 2 ? ' tight' : ''}`}>
       {tabs.map((t) => (
         <button
-          key={t}
-          className={`toptab${t === active ? ' active' : ''}`}
-          onClick={() => onChange(t)}
+          key={t.label}
+          className={`toptab${t.label === active ? ' active' : ''}`}
+          onClick={() => onChange(t.label)}
         >
-          {t}
+          {t.label}
+          {t.count !== undefined && <span className="toptab-count">{t.count}</span>}
         </button>
       ))}
     </div>
@@ -236,6 +243,40 @@ export function ConfirmHost() {
           </button>
           <button className={`btn ${req.danger ? 'danger' : ''}`} onClick={() => answer(true)}>
             {req.confirmLabel}
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export function ChoiceHost() {
+  const req = useUi((s) => s.choiceReq)
+  const answer = useUi((s) => s.answerChoice)
+  if (!req) return null
+  return (
+    <div className="modal-backdrop" onClick={() => answer(null)}>
+      <div className="modal" onClick={(e) => e.stopPropagation()}>
+        <h3>{req.title}</h3>
+        {req.message && <p>{req.message}</p>}
+        <div className="choices">
+          {req.options.map((o) => (
+            <button
+              key={o.value}
+              className={`choice${o.primary ? ' primary' : ''}`}
+              onClick={() => {
+                vibrate()
+                answer(o.value)
+              }}
+            >
+              <span className="choice-label">{o.label}</span>
+              {o.hint && <span className="choice-hint">{o.hint}</span>}
+            </button>
+          ))}
+        </div>
+        <div className="modal-actions">
+          <button className="btn ghost" onClick={() => answer(null)}>
+            Cancel
           </button>
         </div>
       </div>

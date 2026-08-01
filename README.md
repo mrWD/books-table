@@ -17,7 +17,9 @@ same stack, same local-first principles, a different domain.
 - **Book page** — progress with quick `+10 / +25 / +50` steps or an exact page,
   a page count you can correct for your own edition, your own 1–5 rating, and
   Start reading / Give up / Read again / Remove.
-- **Shelf** — Want to read and Finished, with a Gave up section.
+- **Shelf** — three tabs carrying their counts: To read, Finished, Gave up.
+  START asks whether you've begun the book or already read it, then takes you to
+  the tab it moved to instead of leaving you to find it.
 - **"For you" recommendations** — built on the device from what is on your
   shelves: the authors you finished and the subjects those books share. Finished
   books weigh more than a wish-list entry, anything already in the library is

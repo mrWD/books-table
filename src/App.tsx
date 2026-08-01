@@ -6,7 +6,7 @@ import ExplorePage from './pages/ExplorePage'
 import BookDetailPage from './pages/BookDetailPage'
 import ProfilePage from './pages/ProfilePage'
 import InsightsPage from './pages/InsightsPage'
-import { BottomNav, ConfirmHost, ScrollToTop, ToastHost } from './components/ui'
+import { BottomNav, ChoiceHost, ConfirmHost, ScrollToTop, ToastHost } from './components/ui'
 import { SupportFab } from './components/Support'
 import { InstallHint } from './components/InstallHint'
 import { Analytics } from './components/Analytics'
@@ -55,6 +55,7 @@ function Shell() {
       <SupportFab />
       <ToastHost />
       <ConfirmHost />
+      <ChoiceHost />
       <Analytics />
     </div>
   )

@@ -1,13 +1,23 @@
 import { useEffect, useState } from 'react'
 import { useLibrary } from '../store/library'
 import { refreshBooks, useBookCache } from '../store/cache'
-import { buildShelf } from '../store/selectors'
+import { buildShelf, type ShelfItem } from '../store/selectors'
 import { FinishedRow, ShelfRow } from '../components/cards'
-import { EmptyState, SectionPill, TopTabs } from '../components/ui'
+import { EmptyState, TopTabs } from '../components/ui'
 import { IconShelf } from '../components/Icons'
 
+/**
+ * One tab per status, each carrying its count.
+ *
+ * The counts are the point: a shelf is three separate piles, and until the tab said how
+ * big each one was, the only way to find out where a book had gone was to open every
+ * tab. Sections stacked on one screen hid the same information behind a scroll.
+ */
+const TABS = ['TO READ', 'FINISHED', 'GAVE UP'] as const
+type TabName = (typeof TABS)[number]
+
 export default function ShelfPage() {
-  const [tab, setTab] = useState('WANT TO READ')
+  const [tab, setTab] = useState<TabName>('TO READ')
   const books = useLibrary((s) => s.books)
   const entries = useBookCache((s) => s.entries)
 
@@ -21,12 +31,18 @@ export default function ShelfPage() {
   }, [shelvedIds.join(',')])
 
   const shelf = buildShelf(books, entries)
-  const empty = shelf.want.length === 0 && shelf.read.length === 0 && shelf.dropped.length === 0
+  const lists: Record<TabName, ShelfItem[]> = {
+    'TO READ': shelf.want,
+    FINISHED: shelf.read,
+    'GAVE UP': shelf.dropped,
+  }
+  const tabs = TABS.map((label) => ({ label, count: lists[label].length }))
+  const list = lists[tab]
 
-  if (empty) {
+  if (shelvedIds.length === 0) {
     return (
       <div className="page">
-        <TopTabs tabs={['WANT TO READ', 'FINISHED']} active={tab} onChange={setTab} />
+        <TopTabs tabs={tabs} active={tab} onChange={(t) => setTab(t as TabName)} />
         <EmptyState
           icon={<IconShelf size={44} strokeWidth={1.4} />}
           title="The shelf is empty"
@@ -40,51 +56,42 @@ export default function ShelfPage() {
 
   return (
     <div className="page">
-      <TopTabs tabs={['WANT TO READ', 'FINISHED']} active={tab} onChange={setTab} />
-      {tab === 'WANT TO READ' ? (
-        shelf.want.length > 0 ? (
-          <section>
-            <SectionPill>WANT TO READ</SectionPill>
-            <p className="chips-hint">Tap START to move a book to Reading and track pages.</p>
-            {shelf.want.map((item) => (
-              <ShelfRow key={item.book.id} item={item} action="start" />
-            ))}
-          </section>
-        ) : (
-          <EmptyState
-            icon={<IconShelf size={44} strokeWidth={1.4} />}
-            title="Nothing waiting"
-            text="Books you add for later show up here."
-            actionLabel="Browse books"
-            actionTo="/explore"
-          />
-        )
+      <TopTabs tabs={tabs} active={tab} onChange={(t) => setTab(t as TabName)} />
+
+      {tab === 'TO READ' && list.length > 0 && (
+        <p className="chips-hint">Tap START and say whether you've begun it.</p>
+      )}
+
+      {list.length === 0 ? (
+        <EmptyState
+          icon={<IconShelf size={44} strokeWidth={1.4} />}
+          title={
+            tab === 'TO READ'
+              ? 'Nothing waiting'
+              : tab === 'FINISHED'
+                ? 'Nothing finished yet'
+                : 'Nothing abandoned'
+          }
+          text={
+            tab === 'TO READ'
+              ? 'Books you add for later show up here.'
+              : tab === 'FINISHED'
+                ? 'Books you finish are collected here.'
+                : 'Books you give up on wait here in case you change your mind.'
+          }
+          actionLabel={tab === 'TO READ' ? 'Browse books' : undefined}
+          actionTo={tab === 'TO READ' ? '/explore' : undefined}
+        />
+      ) : tab === 'FINISHED' ? (
+        list.map((item) => <FinishedRow key={item.book.id} item={item} />)
       ) : (
-        <>
-          {shelf.read.length > 0 && (
-            <section>
-              <SectionPill>FINISHED</SectionPill>
-              {shelf.read.map((item) => (
-                <FinishedRow key={item.book.id} item={item} />
-              ))}
-            </section>
-          )}
-          {shelf.dropped.length > 0 && (
-            <section>
-              <SectionPill>GAVE UP</SectionPill>
-              {shelf.dropped.map((item) => (
-                <ShelfRow key={item.book.id} item={item} action="reopen" />
-              ))}
-            </section>
-          )}
-          {shelf.read.length === 0 && shelf.dropped.length === 0 && (
-            <EmptyState
-              icon={<IconShelf size={44} strokeWidth={1.4} />}
-              title="Nothing finished yet"
-              text="Books you finish are collected here."
-            />
-          )}
-        </>
+        list.map((item) => (
+          <ShelfRow
+            key={item.book.id}
+            item={item}
+            action={tab === 'TO READ' ? 'start' : 'reopen'}
+          />
+        ))
       )}
     </div>
   )

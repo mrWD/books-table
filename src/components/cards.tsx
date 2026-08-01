@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import type { BookSummary, ShelfStatus } from '../lib/types'
 import { formatAgo, formatAuthors, formatPages } from '../lib/format'
 import type { ReadingItem, ShelfItem } from '../store/selectors'
@@ -95,16 +95,17 @@ export function ReadingGridCard({ item }: { item: ReadingItem }) {
 /**
  * Shelf row.
  *
- * The button on a wish-list row starts the book rather than marking it finished. The
- * film-table original went straight from watch list to watched, which is right for a
- * film — you sit down and it is over. A book is the opposite: the step people look for
- * is "I have begun", and burying it behind the detail page is what made tracking a book
- * feel like it had no entrance. Marking something read without reading it stays
- * possible, one tap deeper, on the book's own page.
+ * The button asks what happened instead of assuming, then takes the person where the
+ * book went. Every silent status change so far ended the same way: the book vanished
+ * from the list in front of you and you had to work out which tab now held it. A
+ * two-option sheet plus a redirect replaces two guesses with one answer — and it also
+ * makes "I read this years ago" reachable, which a single-purpose button could not.
  */
 export function ShelfRow({ item, action }: { item: ShelfItem; action: 'start' | 'reopen' }) {
   const setStatus = useLibrary((s) => s.setStatus)
   const showToast = useUi((s) => s.showToast)
+  const askChoice = useUi((s) => s.askChoice)
+  const navigate = useNavigate()
   const { book, tracked } = item
   const sub = [
     formatAuthors(book.authors),
@@ -114,13 +115,34 @@ export function ShelfRow({ item, action }: { item: ShelfItem; action: 'start' | 
     .filter(Boolean)
     .join(' • ')
 
-  const begin = () => {
+  const ask = async () => {
     const before = tracked.status
-    setStatus(book.id, 'reading')
-    showToast(
-      action === 'start' ? `Started ${book.title}` : `Reading ${book.title} again`,
-      () => setStatus(book.id, before),
-    )
+    const answer = await askChoice({
+      title: book.title,
+      message: 'Where should this one go?',
+      options: [
+        {
+          value: 'reading',
+          label: action === 'start' ? "I'm reading it now" : 'Picking it up again',
+          hint: 'Opens Reading, where a tap logs the pages',
+          primary: true,
+        },
+        {
+          value: 'read',
+          label: action === 'start' ? "I've already read it" : 'I finished it',
+          hint: 'Straight to the Finished shelf',
+        },
+      ],
+    })
+    if (!answer) return
+    setStatus(book.id, answer === 'reading' ? 'reading' : 'read')
+    if (answer === 'reading') {
+      // Land on the tab the book just moved to, rather than on the row's empty space.
+      navigate('/reading')
+      showToast(`${book.title} is on your reading list`, () => setStatus(book.id, before))
+    } else {
+      showToast(`${book.title} marked as read`, () => setStatus(book.id, before))
+    }
   }
 
   return (
@@ -134,12 +156,12 @@ export function ShelfRow({ item, action }: { item: ShelfItem; action: 'start' | 
       <div className="readrow-check">
         <button
           className="startbtn"
-          aria-label={action === 'start' ? `Start reading ${book.title}` : `Read ${book.title} again`}
+          aria-label={`What happened with ${book.title}?`}
           onClick={(e) => {
             e.preventDefault()
             e.stopPropagation()
             vibrate()
-            begin()
+            void ask()
           }}
         >
           <IconPlay size={17} strokeWidth={2} />
@@ -236,6 +258,7 @@ export function AddBookButton({
   const removeBook = useLibrary((s) => s.removeBook)
   const setStatus = useLibrary((s) => s.setStatus)
   const showToast = useUi((s) => s.showToast)
+  const navigate = useNavigate()
   const added = Boolean(tracked)
   return (
     <button
@@ -254,7 +277,10 @@ export function AddBookButton({
           if (status === 'want') {
             showToast(
               `${book.title} — on your shelf`,
-              () => setStatus(book.id, 'reading'),
+              () => {
+                setStatus(book.id, 'reading')
+                navigate('/reading')
+              },
               'START READING',
             )
           } else {

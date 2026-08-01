@@ -49,8 +49,12 @@ Worth running:
 
 - search in all three scopes (ALL / TITLE / AUTHOR) for `dune`, `Булгаков`,
   `atomic habits` — the first two caught real bugs in the source layer;
+- the whole entry path, which is what people got lost in: Explore → `+` → the
+  toast's START READING must land on the Reading tab; Shelf → START must open the
+  two-option sheet, and choosing "I'm reading it now" must also land on Reading;
 - add a book, start it, tap `+10` from the card and `+25` from the detail page,
   then Undo;
+- the three Shelf tabs at 375px — the counts must fit on one line each;
 - set an exact page past the end — it must finish the book, and correcting it
   back below the end must reopen it;
 - the genre strip on Explore (the results must not be all public-domain
@@ -73,6 +77,12 @@ Worth running:
   fact. Every time estimate in the app derives from it.
 - **Quick advance is `+10`, and the button says so.** A book has no discrete
   "next episode", so a one-tap control has to state how far it moves you.
+- **A status change that moves a book between tabs must navigate there.** Every
+  silent version of this failed the same way in review: the book vanished from
+  the list in front of you and you had to guess which tab now held it. Shelf →
+  START asks what happened rather than assuming, then takes you to Reading.
+- **The Shelf tabs carry counts.** Three piles, and until the tab said how big
+  each was, finding a book meant opening all three.
 - **Genre browsing uses search, not `/subjects/`.** See DATA-SOURCES — the
   subjects endpoint returns the same classics for every genre.
 - **Google Books is not used.** Keyless it returns HTTP 429 with a zero quota, so
