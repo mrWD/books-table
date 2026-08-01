@@ -1,0 +1,99 @@
+# BooksTable — project context
+
+This file is read automatically at the start of every session. It holds what
+cannot be derived from the code: why a given decision was made and which pitfalls
+have already been hit.
+
+Details live in `docs/`:
+
+- [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) — data model, progress rules, flows
+- [docs/DATA-SOURCES.md](docs/DATA-SOURCES.md) — Open Library's quirks, measured
+
+## What this is
+
+A personal reading tracker. A PWA: one codebase runs on Android, iPhone and the
+web, installs to the home screen and works offline.
+
+It is a fork of **FilmTable** (`mrWD/film-table`) — same stack, same principles,
+same visual language. Shows became books in progress, movies became the shelf,
+and the one-tap episode check-in became a one-tap page advance.
+
+## Core principles (break only with the owner's explicit consent)
+
+1. **No backend at all.** The library lives in the device's `localStorage`. No
+   accounts, no sync, no data collection. Unlike FilmTable there is not even a
+   proxy: Open Library needs no key.
+2. **The app must work without keys.** If a second source is ever added, it must
+   not become a dependency — the keyless path has to keep working.
+3. **Its own visual identity.** Inherited from FilmTable, which was deliberately
+   steered away from TV Time. Do not reintroduce their section headings, yellow
+   accent, or episode-style codes.
+4. **Verify against the live API before claiming anything.** Every number in
+   `docs/DATA-SOURCES.md` came from an actual request. Add to it the same way.
+
+## How to run
+
+```bash
+npm install
+npm run dev                       # :5173
+npm run build && npm run preview  # :4173
+```
+
+`node scripts/gen-icons.mjs` regenerates the PNG icons from `public/favicon.svg`.
+
+## How to verify
+
+There are no automated tests. Verification is manual, through the browser panel
+at mobile width (375px), and it is a mandatory part of any noticeable change.
+Worth running:
+
+- search in all three scopes (ALL / TITLE / AUTHOR) for `dune`, `Булгаков`,
+  `atomic habits` — the first two caught real bugs in the source layer;
+- add a book, start it, tap `+10` from the card and `+25` from the detail page,
+  then Undo;
+- set an exact page past the end — it must finish the book, and correcting it
+  back below the end must reopen it;
+- the genre strip on Explore (the results must not be all public-domain
+  classics — if they are, someone switched it back to `/subjects/`);
+- the hidden `/#/insights` page (usage counters, not linked from navigation);
+- both themes and **horizontal overflow**
+  (`document.documentElement.scrollWidth` against `clientWidth` — must be 0;
+  this already caught a CSS Grid bug in FilmTable);
+- a clean console.
+
+## Decisions worth knowing
+
+- **Work ids, not editions.** A person tracks the book, not the printing. The
+  page count is the only thing that genuinely differs, so it is overridable per
+  entry.
+- **The session log exists because progress is a moving number.** Without
+  `{at, pages}` entries, "pages read this year" would be unanswerable. Sittings
+  merge within two hours.
+- **`MINUTES_PER_PAGE = 1.5`** is an assumption stated once in `format.ts`, not a
+  fact. Every time estimate in the app derives from it.
+- **Quick advance is `+10`, and the button says so.** A book has no discrete
+  "next episode", so a one-tap control has to state how far it moves you.
+- **Genre browsing uses search, not `/subjects/`.** See DATA-SOURCES — the
+  subjects endpoint returns the same classics for every genre.
+- **Google Books is not used.** Keyless it returns HTTP 429 with a zero quota, so
+  it would require a key and therefore a server.
+- **`scripts/gen-icons.mjs` uses `fileURLToPath`.** `URL.pathname` yields
+  `/C:/…` on Windows and sharp cannot open it; the inherited version was
+  macOS-only.
+
+## Open questions
+
+- The UI is in English, matching FilmTable. Localisation was not requested.
+- Book *series* are not modelled. Open Library's series data is inconsistent, so
+  a cycle like Dune is currently four independent entries.
+- Reading goals (books or pages per year) are not implemented.
+- Production is **<https://mrwd.github.io/books-table/>**, published by
+  `.github/workflows/deploy.yml` on a push to `main`. There is no Vercel
+  deployment; the inherited Analytics component only activates on a
+  `.vercel.app` host, so it is inert there.
+
+## Tone with the owner
+
+Reply in Russian. He values verified facts over assumptions: before claiming
+anything about an API's behaviour, make the request and show the numbers. Do
+large changes in a separate branch and let him review before merging.

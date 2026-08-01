@@ -1,0 +1,184 @@
+import type { ReactNode } from 'react'
+
+interface IconProps {
+  size?: number
+  strokeWidth?: number
+  className?: string
+}
+
+function svg(path: ReactNode, { size = 24, strokeWidth = 1.8, className }: IconProps) {
+  return (
+    <svg
+      className={className}
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      {path}
+    </svg>
+  )
+}
+
+/* An open book, spine down the middle — the app's own mark. */
+export const IconBook = (p: IconProps) =>
+  svg(
+    <>
+      <path d="M12 6.8v13" />
+      <path d="M12 6.8C10.4 5.3 8.2 4.6 5 4.6c-.8 0-1.4.6-1.4 1.4v11.2c0 .8.6 1.4 1.4 1.4 3.2 0 5.4.7 7 2.2" />
+      <path d="M12 6.8c1.6-1.5 3.8-2.2 7-2.2.8 0 1.4.6 1.4 1.4v11.2c0 .8-.6 1.4-1.4 1.4-3.2 0-5.4.7-7 2.2" />
+    </>,
+    p,
+  )
+
+/* Books standing on a shelf. */
+export const IconShelf = (p: IconProps) =>
+  svg(
+    <>
+      <path d="M4 4.5h3.5v14H4zM9.5 4.5H13v14H9.5z" />
+      <path d="M15.4 5.6l3.3.9-3.4 12.4-3.3-.9z" />
+      <path d="M2.5 20.5h19" />
+    </>,
+    p,
+  )
+
+export const IconBookmark = (p: IconProps) =>
+  svg(<path d="M6.5 3.5h11v17l-5.5-4-5.5 4z" />, p)
+
+export const IconSearch = (p: IconProps) =>
+  svg(
+    <>
+      <circle cx="11" cy="11" r="7" />
+      <path d="M16.5 16.5L21 21" />
+    </>,
+    p,
+  )
+
+export const IconUser = (p: IconProps) =>
+  svg(
+    <>
+      <circle cx="12" cy="8" r="4" />
+      <path d="M4.5 20.5c1.5-3.5 4.2-5 7.5-5s6 1.5 7.5 5" />
+    </>,
+    p,
+  )
+
+export const IconCheck = (p: IconProps) => svg(<path d="M5 12.5l4.5 4.5L19 7.5" />, p)
+
+export const IconPlus = (p: IconProps) => svg(<path d="M12 5v14M5 12h14" />, p)
+
+export const IconMinus = (p: IconProps) => svg(<path d="M5 12h14" />, p)
+
+export const IconPencil = (p: IconProps) =>
+  svg(
+    <>
+      <path d="M4 20h4l10-10-4-4L4 16z" />
+      <path d="M14.5 5.5l4 4" />
+    </>,
+    p,
+  )
+
+export const IconChevronRight = (p: IconProps) => svg(<path d="M9 5l7 7-7 7" />, p)
+
+export const IconChevronDown = (p: IconProps) => svg(<path d="M5 9l7 7 7-7" />, p)
+
+export const IconBack = (p: IconProps) => svg(<path d="M15 5l-7 7 7 7" />, p)
+
+export const IconGrid = (p: IconProps) =>
+  svg(
+    <>
+      <rect x="4" y="4" width="7" height="7" rx="1.5" />
+      <rect x="13" y="4" width="7" height="7" rx="1.5" />
+      <rect x="4" y="13" width="7" height="7" rx="1.5" />
+      <rect x="13" y="13" width="7" height="7" rx="1.5" />
+    </>,
+    p,
+  )
+
+export const IconList = (p: IconProps) =>
+  svg(
+    <>
+      <path d="M9 6h11M9 12h11M9 18h11" />
+      <path d="M4 6h.01M4 12h.01M4 18h.01" strokeWidth={2.6} />
+    </>,
+    p,
+  )
+
+export const IconTrash = (p: IconProps) =>
+  svg(
+    <>
+      <path d="M4 7h16M10 4h4M6.5 7l1 13h9l1-13" />
+      <path d="M10 11v5M14 11v5" />
+    </>,
+    p,
+  )
+
+export const IconDownload = (p: IconProps) =>
+  svg(
+    <>
+      <path d="M12 4v11M7 10.5l5 5 5-5" />
+      <path d="M4.5 19.5h15" />
+    </>,
+    p,
+  )
+
+export const IconUpload = (p: IconProps) =>
+  svg(
+    <>
+      <path d="M12 15V4M7 8.5l5-5 5 5" />
+      <path d="M4.5 19.5h15" />
+    </>,
+    p,
+  )
+
+export const IconStop = (p: IconProps) => svg(<rect x="6" y="6" width="12" height="12" rx="2" />, p)
+
+export const IconPlay = (p: IconProps) => svg(<path d="M8 5.5l11 6.5-11 6.5z" />, p)
+
+export const IconStar = (p: IconProps) =>
+  svg(<path d="M12 3.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.8z" />, p)
+
+export const IconCalendar = (p: IconProps) =>
+  svg(
+    <>
+      <rect x="3.5" y="5.5" width="17" height="15" rx="2" />
+      <path d="M3.5 10h17M8 3v4M16 3v4" />
+    </>,
+    p,
+  )
+
+export const IconX = (p: IconProps) => svg(<path d="M6 6l12 12M18 6L6 18" />, p)
+
+export const IconHeart = (p: IconProps) =>
+  svg(
+    <path d="M12 20s-7-4.4-7-9.2A4 4 0 0 1 12 8a4 4 0 0 1 7 2.8C19 15.6 12 20 12 20z" />,
+    p,
+  )
+
+export const IconMail = (p: IconProps) =>
+  svg(
+    <>
+      <rect x="3" y="5" width="18" height="14" rx="2.5" />
+      <path d="M3.5 7l8.5 6 8.5-6" />
+    </>,
+    p,
+  )
+
+/* Filled, unlike the rest: the wordmark is a solid glyph and an outline reads as broken. */
+export const IconLinkedIn = ({ size = 24, className }: IconProps) => (
+  <svg
+    className={className}
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    aria-hidden="true"
+  >
+    <path d="M4.98 3.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM3 9.5h4v11H3v-11zm7 0h3.8v1.5h.05c.53-.95 1.83-1.95 3.75-1.95 4 0 4.75 2.5 4.75 5.8v5.65h-4v-5c0-1.2-.02-2.75-1.7-2.75-1.7 0-1.96 1.3-1.96 2.66v5.09h-4v-11z" />
+  </svg>
+)
