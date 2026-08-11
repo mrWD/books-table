@@ -27,6 +27,16 @@ const config: CapacitorConfig = {
   android: {
     backgroundColor: '#f2f2f2',
   },
+  plugins: {
+    SplashScreen: {
+      // The library is read from a file before the first render, so there is a moment
+      // with nothing to show. Auto-hiding on a timer would either cut that short or
+      // outlast it; main.tsx hides the splash when the render actually happens.
+      launchAutoHide: false,
+      backgroundColor: '#f2f2f2',
+      androidSplashResourceName: 'splash',
+    },
+  },
 }
 
 export default config

@@ -8,6 +8,7 @@ import {
   type ShelfStatus,
   type TrackedBook,
 } from '../lib/types'
+import { successFeedback, tapFeedback } from '../lib/native-ui'
 import { deviceStorage } from '../lib/storage'
 import { useBookCache } from './cache'
 import { useStats } from './stats'
@@ -91,7 +92,10 @@ export const useLibrary = create<LibraryState>()(
       setStatus: (id, status) => {
         // Side effects stay outside the updater: it must be pure, and StrictMode runs it
         // twice, which would double every counter.
-        if (status === 'read') useStats.getState().recordFinished()
+        if (status === 'read') {
+          useStats.getState().recordFinished()
+          successFeedback()
+        }
         set((s) => {
           const t = s.books[id]
           if (!t) return s
@@ -120,9 +124,15 @@ export const useLibrary = create<LibraryState>()(
         const total = t.pages ?? null
         const target = Math.max(0, total ? Math.min(page, total) : page)
         const delta = target - t.page
-        if (delta > 0) useStats.getState().recordCheckIn()
+        if (delta > 0) {
+          useStats.getState().recordCheckIn()
+          tapFeedback()
+        }
         // Reading to the last page is a finish just as much as pressing the button is.
-        if (total && target >= total && t.status !== 'read') useStats.getState().recordFinished()
+        if (total && target >= total && t.status !== 'read') {
+          useStats.getState().recordFinished()
+          successFeedback()
+        }
         set((s) => {
           const cur = s.books[id]
           if (!cur) return s

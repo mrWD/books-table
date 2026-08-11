@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
+import { syncStatusBar } from '../lib/native-ui'
 
 export type ThemeChoice = 'system' | 'light' | 'dark'
 
@@ -16,14 +17,18 @@ export function resolveTheme(choice: ThemeChoice): 'light' | 'dark' {
   return choice === 'system' ? (systemPrefersDark() ? 'dark' : 'light') : choice
 }
 
-/** Drives the CSS palette and the browser chrome colour (PWA status bar). */
+/** Drives the CSS palette and the chrome colour: PWA theme-color, native status bar. */
 export function applyTheme(choice: ThemeChoice): void {
   const root = document.documentElement
   if (choice === 'system') delete root.dataset.theme
   else root.dataset.theme = choice
 
+  const resolved = resolveTheme(choice)
   const meta = document.querySelector('meta[name="theme-color"]')
-  meta?.setAttribute('content', THEME_COLORS[resolveTheme(choice)])
+  meta?.setAttribute('content', THEME_COLORS[resolved])
+  // Deliberately not passed the resolved theme: natively the strip behind the icons is
+  // painted by the system, not by this app. See syncStatusBar.
+  syncStatusBar()
 }
 
 interface ThemeState {
@@ -55,6 +60,9 @@ export function watchSystemTheme(): () => void {
   if (!mq) return () => {}
   const onChange = () => {
     if (useTheme.getState().theme === 'system') applyTheme('system')
+    // The native status bar strip is painted by the system whatever this app's theme is,
+    // so its icons have to follow the system even when the app does not.
+    else syncStatusBar()
   }
   mq.addEventListener('change', onChange)
   return () => mq.removeEventListener('change', onChange)
