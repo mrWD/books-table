@@ -3,8 +3,11 @@
 ## Shape
 
 A single-page React app with no server. Everything the person owns lives in
-`localStorage`; everything about a book is fetched from Open Library and cached
-next to it.
+IndexedDB (`bookstable-kv`, adapter in `lib/idb-storage.ts`; it lived in
+`localStorage` until 2026-08 — the old value was copied once and left frozen so
+a rollback still finds it); everything about a book is fetched from Open Library
+and cached next to it. Hydration is asynchronous, so `main.tsx` holds the first
+render until it settles.
 
 ```
 src/lib/api.ts          the only network layer — Open Library

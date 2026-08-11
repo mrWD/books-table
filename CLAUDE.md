@@ -20,7 +20,10 @@ and the one-tap episode check-in became a one-tap page advance.
 
 ## Core principles (break only with the owner's explicit consent)
 
-1. **No backend at all.** The library lives in the device's `localStorage`. No
+1. **No backend at all.** The library lives on the device — IndexedDB for the
+   library and cache (moved from `localStorage` in 2026-08 with the owner's
+   consent, adapter in `lib/idb-storage.ts`; the old value is copied once and
+   left frozen so a rollback still finds it), localStorage for small prefs. No
    accounts, no sync, nothing personal collected. Unlike FilmTable there is not
    even a proxy: Open Library needs no key. The single exception is
    `src/components/Analytics.tsx`: on a `.vercel.app` host it reports cookieless
