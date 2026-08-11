@@ -20,11 +20,14 @@ and the one-tap episode check-in became a one-tap page advance.
 
 ## Core principles (break only with the owner's explicit consent)
 
-1. **No backend at all.** The library lives on the device — IndexedDB for the
-   library and cache (moved from `localStorage` in 2026-08 with the owner's
-   consent, adapter in `lib/idb-storage.ts`; the old value is copied once and
-   left frozen so a rollback still finds it), localStorage for small prefs. No
-   accounts, no sync, nothing personal collected. Unlike FilmTable there is not
+1. **No backend at all.** The library lives on the device: IndexedDB in a
+   browser, a JSON file in private app storage when running natively, and
+   localStorage for small prefs. Both moves happened in 2026-08 with the owner's
+   consent and use the same one-way copy — read the old store once, write the
+   new one, leave the old value frozen so a rollback still finds the library.
+   The adapter is `createDeviceStorage` in `tables-core`, wired up in
+   `lib/storage.ts` and `lib/native.ts`. No accounts, no sync, nothing personal
+   collected. Unlike FilmTable there is not
    even a proxy: Open Library needs no key. The single exception is
    `src/components/Analytics.tsx`: on a `.vercel.app` host it reports cookieless
    screen-view counts to Vercel Web Analytics — a screen name, never a title, a

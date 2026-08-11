@@ -2,7 +2,7 @@ import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
 import type { BookCacheEntry, BookSummary } from '../lib/types'
 import { fetchBook } from '../lib/api'
-import { idbStorage } from '../lib/storage'
+import { deviceStorage } from '../lib/storage'
 
 /**
  * Book records barely change, so the cache is what makes the shelves work offline and
@@ -52,7 +52,7 @@ export const useBookCache = create<CacheState>()(
       name: 'bookstable-cache-v1',
       version: 1,
       // Book summaries for every tracked book — the other blob that outgrew localStorage.
-      storage: createJSONStorage(() => idbStorage),
+      storage: createJSONStorage(() => deviceStorage),
     },
   ),
 )

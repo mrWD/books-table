@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { isNativeApp } from 'tables-core'
 import { useAutoBackup } from '../store/backup'
 import { IconDownload } from './Icons'
 
@@ -6,6 +7,10 @@ import { IconDownload } from './Icons'
  * The only copy that survives someone clearing site data is one outside the browser.
  * On Chromium the app can keep such a file up to date by itself, once the person picks
  * it; elsewhere the API does not exist and the manual export stays the answer.
+ *
+ * The installed app is a third case. Its library already lives in a file the browser
+ * cannot touch, so the browser warning would be untrue there — but that file goes when
+ * the app is deleted, which is what an export still protects against.
  */
 export function AutoBackup() {
   const { state, fileName, lastWriteAt, init, choose, resume, disable } = useAutoBackup()
@@ -14,6 +19,15 @@ export function AutoBackup() {
     void init()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  if (isNativeApp()) {
+    return (
+      <p className="chips-hint">
+        Your library is stored inside the app, where clearing a browser cannot reach it.
+        Deleting the app still takes it — export a copy now and then.
+      </p>
+    )
+  }
 
   if (state === 'unsupported') {
     return (
