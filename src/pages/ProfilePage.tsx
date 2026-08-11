@@ -11,6 +11,7 @@ import { AutoBackup } from '../components/AutoBackup'
 import { SupportLinks } from '../components/Support'
 import { Feedback } from '../components/Feedback'
 import { exportJsonFile, isNativeApp } from 'tables-core'
+import { useReminders } from '../store/reminders'
 import { native } from '../lib/native'
 import { formatBigDuration } from '../lib/format'
 import { Poster } from '../components/ui'
@@ -47,6 +48,8 @@ export default function ProfilePage() {
   const books = useLibrary((s) => s.books)
   const importBackup = useLibrary((s) => s.importBackup)
   const resetAll = useLibrary((s) => s.resetAll)
+  const remindersOn = useReminders((s) => s.enabled)
+  const setRemindersOn = useReminders((s) => s.setEnabled)
   const entries = useBookCache((s) => s.entries)
   const showToast = useUi((s) => s.showToast)
   const askConfirm = useUi((s) => s.askConfirm)
@@ -167,6 +170,29 @@ export default function ProfilePage() {
             : `Always ${theme}, whatever the device is set to.`}
         </p>
       </section>
+
+      {isNativeApp() && (
+        <section>
+          <h2 className="h2">Reminders</h2>
+          <div className="chips">
+            {([false, true] as const).map((on) => (
+              <button
+                key={String(on)}
+                className={`chip${remindersOn === on ? ' active' : ''}`}
+                aria-pressed={remindersOn === on}
+                onClick={() => void setRemindersOn(on)}
+              >
+                {on ? 'ON' : 'OFF'}
+              </button>
+            ))}
+          </div>
+          <p className="chips-hint">
+            {remindersOn
+              ? 'After three quiet days, one evening nudge about the book you were reading.'
+              : 'No reminders. Turning this on asks the system for permission.'}
+          </p>
+        </section>
+      )}
 
       <section>
         <h2 className="h2">Data</h2>
