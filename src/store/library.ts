@@ -8,7 +8,7 @@ import {
   type ShelfStatus,
   type TrackedBook,
 } from '../lib/types'
-import { idbStorage } from '../lib/idb-storage'
+import { idbStorage } from '../lib/storage'
 import { useBookCache } from './cache'
 import { useStats } from './stats'
 
@@ -186,7 +186,7 @@ export const useLibrary = create<LibraryState>()(
       name: 'bookstable-library-v1',
       version: 1,
       // IndexedDB via idbStorage: no ~5 MB localStorage ceiling, and the value migrates
-      // once from localStorage on first load (see idb-storage.ts). Hydration is async —
+      // once from localStorage on first load (see lib/storage.ts). Hydration is async —
       // main.tsx holds the first render until it settles.
       storage: createJSONStorage(() => idbStorage),
       partialize: (s) => ({ books: s.books, shelfGrid: s.shelfGrid }),

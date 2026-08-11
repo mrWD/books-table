@@ -2,7 +2,7 @@ import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
 import type { BookCacheEntry, BookSummary } from '../lib/types'
 import { fetchBook } from '../lib/api'
-import { idbStorage } from '../lib/idb-storage'
+import { idbStorage } from '../lib/storage'
 
 /**
  * Book records barely change, so the cache is what makes the shelves work offline and

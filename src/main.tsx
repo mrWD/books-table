@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client'
 import { registerSW } from 'virtual:pwa-register'
 import './styles.css'
 import App from './App'
-import { whenHydrated } from './lib/idb-storage'
+import { whenHydrated } from 'tables-core'
 import { useLibrary } from './store/library'
 import { useBookCache } from './store/cache'
 
