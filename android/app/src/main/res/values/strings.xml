@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">BooksTable</string>
+    <string name="title_activity_main">BooksTable</string>
+    <string name="package_name">com.mrwd.bookstable</string>
+    <string name="custom_url_scheme">com.mrwd.bookstable</string>
+</resources>
