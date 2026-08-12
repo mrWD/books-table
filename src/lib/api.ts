@@ -48,8 +48,22 @@ export function withTimeout<T>(p: Promise<T>, ms: number, fallback: T): Promise<
   })
 }
 
+/**
+ * A deadline on every call, so a slow Open Library cannot leave a screen on loading
+ * skeletons indefinitely.
+ *
+ * `withTimeout` above already guards the recommendation fan-out, but search and the
+ * detail pages call straight through here and had nothing. The sibling app showed why
+ * that matters: with its upstream down, a request took 19.5 seconds to fail and the
+ * app read as hung rather than unlucky.
+ *
+ * Eight seconds: clear of a slow mobile round trip, still inside the span of someone's
+ * attention.
+ */
+const REQUEST_TIMEOUT_MS = 8000
+
 async function getJson<T>(url: string): Promise<T> {
-  const res = await fetch(url)
+  const res = await fetch(url, { signal: AbortSignal.timeout?.(REQUEST_TIMEOUT_MS) })
   if (!res.ok) throw new Error(`HTTP ${res.status} for ${url}`)
   return res.json() as Promise<T>
 }

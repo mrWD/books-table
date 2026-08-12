@@ -2,9 +2,27 @@
 
 ## Shape
 
-A single-page React app with no server. Everything the person owns lives in
-`localStorage`; everything about a book is fetched from Open Library and cached
-next to it.
+A single-page React app with no server, shipped both as a PWA and — since
+2026-08 — as a native app wrapped with Capacitor.
+
+Everything the person owns lives on the device, in whichever store the platform
+makes durable:
+
+| Where it runs | Store | Why |
+|---|---|---|
+| Browser | IndexedDB `bookstable-kv` | No ~5 MB ceiling, unlike the `localStorage` it replaced |
+| Native app | `Documents/bookstable-*.json` (iOS) · `files/` (Android) | A WebView's IndexedDB is *site data* the OS may reclaim; a file in the app container is not |
+
+Both moves — `localStorage` → IndexedDB → file — use the same one-way copy: read
+the old store once, write the new one, and leave the old value in place, frozen.
+An older build then still finds the library as of the migration moment rather
+than nothing. The adapter is `createDeviceStorage` in `tables-core`; this repo
+supplies only the database name, the Capacitor plugins (`lib/native.ts`) and the
+toast a failed write shows (`lib/storage.ts`).
+
+Everything about a book is fetched from Open Library and cached next to it.
+Hydration is asynchronous in every configuration, so `main.tsx` holds the first
+render until it settles.
 
 ```
 src/lib/api.ts          the only network layer — Open Library

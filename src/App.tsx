@@ -9,8 +9,10 @@ import { BottomNav, ChoiceHost, ConfirmHost, ScrollToTop, ToastHost } from './co
 import { SupportFab } from './components/Support'
 import { InstallHint } from './components/InstallHint'
 import { Analytics } from './components/Analytics'
+import { rescheduleReadingReminder } from './lib/reminders'
 import { useLibrary } from './store/library'
 import { refreshBooks } from './store/cache'
+import { useReminders } from './store/reminders'
 import { watchSystemTheme } from './store/theme'
 import { beginSessionOnce, useStats } from './store/stats'
 
@@ -26,6 +28,9 @@ function Shell() {
         .map((t) => t.id),
     )
     beginSessionOnce()
+    // Every open pushes the reading reminder three days out again; it only ever fires
+    // for the person who stopped opening the app.
+    void rescheduleReadingReminder(useReminders.getState().enabled)
     return watchSystemTheme()
   }, [])
 

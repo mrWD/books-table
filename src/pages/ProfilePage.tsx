@@ -10,6 +10,9 @@ import { YearReview } from '../components/YearReview'
 import { AutoBackup } from '../components/AutoBackup'
 import { SupportLinks } from '../components/Support'
 import { Feedback } from '../components/Feedback'
+import { exportJsonFile, isNativeApp } from 'tables-core'
+import { useReminders } from '../store/reminders'
+import { native } from '../lib/native'
 import { formatBigDuration } from '../lib/format'
 import { Poster } from '../components/ui'
 import { IconDownload, IconTrash, IconUpload, IconUser } from '../components/Icons'
@@ -45,6 +48,8 @@ export default function ProfilePage() {
   const books = useLibrary((s) => s.books)
   const importBackup = useLibrary((s) => s.importBackup)
   const resetAll = useLibrary((s) => s.resetAll)
+  const remindersOn = useReminders((s) => s.enabled)
+  const setRemindersOn = useReminders((s) => s.setEnabled)
   const entries = useBookCache((s) => s.entries)
   const showToast = useUi((s) => s.showToast)
   const askConfirm = useUi((s) => s.askConfirm)
@@ -54,15 +59,17 @@ export default function ProfilePage() {
 
   const stats = buildStats(books, entries)
 
-  const doExport = () => {
+  const doExport = async () => {
     const backup = buildBackup()
-    const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = `bookstable-backup-${new Date().toISOString().slice(0, 10)}.json`
-    a.click()
-    URL.revokeObjectURL(url)
+    const name = `bookstable-backup-${new Date().toISOString().slice(0, 10)}.json`
+    const outcome = await exportJsonFile(backup, name, native)
+    // Closing the share sheet is an answer, not an error; a real failure has to be said
+    // out loud, or someone walks away believing they have a backup.
+    if (outcome === 'cancelled') return
+    if (outcome === 'failed') {
+      showToast('Export failed — the backup was not saved')
+      return
+    }
     useStats.getState().recordExport()
     showToast('Backup exported')
   }
@@ -164,15 +171,43 @@ export default function ProfilePage() {
         </p>
       </section>
 
+      {isNativeApp() && (
+        <section>
+          <h2 className="h2">Reminders</h2>
+          <div className="chips">
+            {([false, true] as const).map((on) => (
+              <button
+                key={String(on)}
+                className={`chip${remindersOn === on ? ' active' : ''}`}
+                aria-pressed={remindersOn === on}
+                onClick={() => void setRemindersOn(on)}
+              >
+                {on ? 'ON' : 'OFF'}
+              </button>
+            ))}
+          </div>
+          <p className="chips-hint">
+            {remindersOn
+              ? 'After three quiet days, one evening nudge about the book you were reading.'
+              : 'No reminders. Turning this on asks the system for permission.'}
+          </p>
+        </section>
+      )}
+
       <section>
         <h2 className="h2">Data</h2>
         <BackupNudge items={Object.keys(books).length} />
         <div className="datacard">
-          <button className="datarow" onClick={doExport}>
+          <button className="datarow" onClick={() => void doExport()}>
             <IconDownload size={20} />
             <div>
               <div className="datarow-title">Export backup</div>
-              <div className="datarow-sub">Download your library as a JSON file</div>
+              <div className="datarow-sub">
+                {/* In the app the file goes to the share sheet, not a download folder. */}
+                {isNativeApp()
+                  ? 'Save your library as a JSON file'
+                  : 'Download your library as a JSON file'}
+              </div>
             </div>
           </button>
           <button className="datarow" onClick={() => fileRef.current?.click()}>
