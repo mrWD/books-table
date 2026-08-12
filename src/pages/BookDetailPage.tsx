@@ -5,7 +5,14 @@ import { ensureBook, useBookCache } from '../store/cache'
 import { useLibrary } from '../store/library'
 import { useUi } from '../store/ui'
 import { totalOf } from '../store/selectors'
-import { formatAgo, formatBigDuration, formatPages, percentOf, readingMinutes } from '../lib/format'
+import {
+  formatAgo,
+  formatAuthors,
+  formatBigDuration,
+  formatPages,
+  percentOf,
+  readingMinutes,
+} from '../lib/format'
 import { displaySubjects } from '../lib/subjects'
 import { Badge, Poster, ProgressBar, StarRating, useNow } from '../components/ui'
 import {
@@ -69,7 +76,9 @@ export default function BookDetailPage() {
   const pagesLeft = total ? Math.max(0, total - page) : null
 
   const meta = [
-    book.authors.join(', '),
+    // Through formatAuthors, not a raw join: Open Library repeats each author once
+    // per script, and this line is where "Frank Herbert, Френк Герберт" showed up.
+    formatAuthors(book.authors, 3),
     book.firstPublishYear ? String(book.firstPublishYear) : '',
     formatPages(total),
     book.editionCount ? `${book.editionCount} editions` : '',

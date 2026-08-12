@@ -82,10 +82,25 @@ export function formatPages(pages: number | null | undefined): string {
   return `${pages} p.`
 }
 
+/**
+ * Open Library lists the same person once per script: "Frank Herbert" comes back next
+ * to "Френк Герберт", and Murakami next to 村上春樹. Rendered as-is, Dune looks like a
+ * book with four authors — which is what the card actually showed.
+ *
+ * When a Latin-script name is present the others are transliterations of it rather than
+ * extra people, so they go. When nothing is Latin the list is left alone: an entry whose
+ * author only exists in one script should still show that author.
+ */
+function withoutTransliterations(authors: readonly string[]): string[] {
+  const latin = authors.filter((a) => /\p{Script=Latin}/u.test(a))
+  return latin.length > 0 ? latin : [...authors]
+}
+
 export function formatAuthors(authors: readonly string[] | undefined, max = 2): string {
   if (!authors || authors.length === 0) return ''
-  if (authors.length <= max) return authors.join(', ')
-  return `${authors.slice(0, max).join(', ')} +${authors.length - max}`
+  const names = withoutTransliterations(authors)
+  if (names.length <= max) return names.join(', ')
+  return `${names.slice(0, max).join(', ')} +${names.length - max}`
 }
 
 export function percentOf(value: number, max: number | null | undefined): number {
