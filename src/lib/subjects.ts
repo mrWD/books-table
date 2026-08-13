@@ -117,7 +117,6 @@ const ALIASES: Record<string, Subject> = {
   memoir: 'Biography',
   memoirs: 'Biography',
   biographies: 'Biography',
-  diaries: 'Biography',
   worldhistory: 'History',
   militaryhistory: 'History',
   ancienthistory: 'History',
@@ -199,6 +198,10 @@ const NOISE = [
   'collection',
   'readers',
   'award',
+  // A subject about an adaptation describes a different work: Open Library carries
+  // "Comics & graphic novels, adaptations" on Sapiens because a graphic novel of it
+  // exists, and that tag was enough to file a history book under Comics.
+  'adaptation',
 ]
 
 export function isNoiseSubject(raw: string): boolean {
@@ -206,9 +209,20 @@ export function isNoiseSubject(raw: string): boolean {
   return NOISE.some((n) => s.includes(n))
 }
 
+/**
+ * Shelf labels that name two genres but claim only the first. "Science Fiction &
+ * Fantasy" is a shop's shelf, not a statement that the book is fantasy — split blindly
+ * it filed The Martian under Fantasy.
+ */
+const COMBINED_SHELVES: Record<string, Subject> = {
+  sciencefictionfantasy: 'Science Fiction',
+  mysterythriller: 'Mystery',
+  romancewomensfiction: 'Romance',
+}
+
 function normalizeOne(raw: string): Subject | null {
   const key = raw.toLowerCase().replace(/[^a-z]/g, '')
-  return ALIASES[key] ?? CANON_LOOKUP.get(key) ?? null
+  return COMBINED_SHELVES[key] ?? ALIASES[key] ?? CANON_LOOKUP.get(key) ?? null
 }
 
 /**
@@ -226,8 +240,14 @@ export function canonicalSubjects(raw: readonly (string | null | undefined)[]): 
       out.add(whole)
       continue
     }
+    // A combined shelf is answered as a whole above; splitting it here would put the
+    // second genre back.
+    if (COMBINED_SHELVES[value.toLowerCase().replace(/[^a-z]/g, '')]) continue
     // "Fiction, fantasy, general" and "Science fiction & fantasy" hide two genres each.
-    for (const part of value.split(/[&,/—-]/)) {
+    // The colon belongs here too: Open Library carries machine-tagged subjects like
+    // `genre:fantasy` and `form:novel`, and without splitting on it Piranesi lost the
+    // Fantasy that was sitting in plain sight.
+    for (const part of value.split(/[&,/:—-]/)) {
       const hit = normalizeOne(part.trim())
       if (hit) out.add(hit)
     }
