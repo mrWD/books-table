@@ -10,6 +10,7 @@ import { SupportFab } from './components/Support'
 import { InstallHint } from './components/InstallHint'
 import { Analytics } from './components/Analytics'
 import { rescheduleReadingReminder } from './lib/reminders'
+import { refreshWidgets } from './lib/widget'
 import { useLibrary } from './store/library'
 import { refreshBooks } from './store/cache'
 import { useReminders } from './store/reminders'
@@ -31,7 +32,16 @@ function Shell() {
     // Every open pushes the reading reminder three days out again; it only ever fires
     // for the person who stopped opening the app.
     void rescheduleReadingReminder(useReminders.getState().enabled)
-    return watchSystemTheme()
+    // The widgets are fed from the same store the shelves read, so a subscription is
+    // enough: every check-in, finish or shelf change pushes a fresh snapshot, and the
+    // app never has to remember to call this from each of those places.
+    void refreshWidgets()
+    const stopWidgets = useLibrary.subscribe(() => void refreshWidgets())
+    const stopTheme = watchSystemTheme()
+    return () => {
+      stopWidgets()
+      stopTheme()
+    }
   }, [])
 
   useEffect(() => {

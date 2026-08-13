@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2840756421C3DA9A9EF66FF8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E777247A8909792F511F6979 /* Foundation.framework */; };
 		2FAD9763203C412B000D30F8 /* config.xml in Resources */ = {isa = PBXBuildFile; fileRef = 2FAD9762203C412B000D30F8 /* config.xml */; };
+		3122AFD84CAEFACD8C5B74CF /* BooksTableWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE06067F945464DAF1CE6525 /* BooksTableWidget.swift */; };
 		4D22ABE92AF431CB00220026 /* CapApp-SPM in Frameworks */ = {isa = PBXBuildFile; productRef = 4D22ABE82AF431CB00220026 /* CapApp-SPM */; };
 		50379B232058CBB4000EE86E /* capacitor.config.json in Resources */ = {isa = PBXBuildFile; fileRef = 50379B222058CBB4000EE86E /* capacitor.config.json */; };
 		504EC3081FED79650016851F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504EC3071FED79650016851F /* AppDelegate.swift */; };
@@ -15,8 +17,36 @@
 		504EC30F1FED79650016851F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 504EC30E1FED79650016851F /* Assets.xcassets */; };
 		504EC3121FED79650016851F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 504EC3101FED79650016851F /* LaunchScreen.storyboard */; };
 		50B271D11FEDC1A000F3C39B /* public in Resources */ = {isa = PBXBuildFile; fileRef = 50B271D01FEDC1A000F3C39B /* public */; };
+		661DEA6E99FDEAEEB592E3E5 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E54B4550B9A8C6D6C6783E /* MainViewController.swift */; };
+		8B1E7772A0CAE742F7D75B39 /* WidgetBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7423D01139F932A523FDF9 /* WidgetBridge.swift */; };
 		9582B6832FE993A70072D4E8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9582B6822FE993A50072D4E8 /* SceneDelegate.swift */; };
+		A60D44724014D727C6405108 /* Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC00F8AAAC4325DF936BDFC6 /* Snapshot.swift */; };
+		D1C84E700BB24EC7716F5914 /* BooksTableWidget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = E78859176CAFE39D59FD01AF /* BooksTableWidget.appex */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		3F62703A323DC98D9B5EE486 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 504EC2FC1FED79650016851F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D65AE6A710D7A4D474B95199;
+			remoteInfo = BooksTableWidget;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		139DB1932E446BF1E9BCB41C /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				D1C84E700BB24EC7716F5914 /* BooksTableWidget.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		2FAD9762203C412B000D30F8 /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = config.xml; sourceTree = "<group>"; };
@@ -28,11 +58,26 @@
 		504EC3111FED79650016851F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		504EC3131FED79650016851F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		50B271D01FEDC1A000F3C39B /* public */ = {isa = PBXFileReference; lastKnownFileType = folder; path = public; sourceTree = "<group>"; };
+		63E54B4550B9A8C6D6C6783E /* MainViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		9582B6822FE993A50072D4E8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		958DCC722DB07C7200EA8C5F /* debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = debug.xcconfig; path = ../debug.xcconfig; sourceTree = SOURCE_ROOT; };
+		AE06067F945464DAF1CE6525 /* BooksTableWidget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BooksTableWidget.swift; sourceTree = "<group>"; };
+		BC89B6EC0D06CED12FF01360 /* App.entitlements */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.entitlements; name = App.entitlements; path = App/App.entitlements; sourceTree = "<group>"; };
+		BE7423D01139F932A523FDF9 /* WidgetBridge.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WidgetBridge.swift; sourceTree = "<group>"; };
+		CC00F8AAAC4325DF936BDFC6 /* Snapshot.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Snapshot.swift; sourceTree = "<group>"; };
+		E777247A8909792F511F6979 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		E78859176CAFE39D59FD01AF /* BooksTableWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = BooksTableWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		398F0BA23E8352D1B6B8590B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2840756421C3DA9A9EF66FF8 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		504EC3011FED79650016851F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -44,12 +89,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		01331DD6DA0D3A132109FD4C /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				E777247A8909792F511F6979 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		0313726D2467E1EF4D3E0138 /* BooksTableWidget */ = {
+			isa = PBXGroup;
+			children = (
+				CC00F8AAAC4325DF936BDFC6 /* Snapshot.swift */,
+				AE06067F945464DAF1CE6525 /* BooksTableWidget.swift */,
+			);
+			name = BooksTableWidget;
+			path = BooksTableWidget;
+			sourceTree = "<group>";
+		};
+		21D4CCAD86AFE369AAB619A0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				01331DD6DA0D3A132109FD4C /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		504EC2FB1FED79650016851F = {
 			isa = PBXGroup;
 			children = (
 				958DCC722DB07C7200EA8C5F /* debug.xcconfig */,
 				504EC3061FED79650016851F /* App */,
 				504EC3051FED79650016851F /* Products */,
+				21D4CCAD86AFE369AAB619A0 /* Frameworks */,
+				0313726D2467E1EF4D3E0138 /* BooksTableWidget */,
 			);
 			sourceTree = "<group>";
 		};
@@ -57,6 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				504EC3041FED79650016851F /* App.app */,
+				E78859176CAFE39D59FD01AF /* BooksTableWidget.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -73,6 +147,9 @@
 				504EC3131FED79650016851F /* Info.plist */,
 				2FAD9762203C412B000D30F8 /* config.xml */,
 				50B271D01FEDC1A000F3C39B /* public */,
+				BE7423D01139F932A523FDF9 /* WidgetBridge.swift */,
+				63E54B4550B9A8C6D6C6783E /* MainViewController.swift */,
+				BC89B6EC0D06CED12FF01360 /* App.entitlements */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -87,10 +164,12 @@
 				504EC3001FED79650016851F /* Sources */,
 				504EC3011FED79650016851F /* Frameworks */,
 				504EC3021FED79650016851F /* Resources */,
+				139DB1932E446BF1E9BCB41C /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				E0FAFC045882629E401DC083 /* PBXTargetDependency */,
 			);
 			name = App;
 			packageProductDependencies = (
@@ -99,6 +178,23 @@
 			productName = App;
 			productReference = 504EC3041FED79650016851F /* App.app */;
 			productType = "com.apple.product-type.application";
+		};
+		D65AE6A710D7A4D474B95199 /* BooksTableWidget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1AB497AAEC8B0B4B64D954E4 /* Build configuration list for PBXNativeTarget "BooksTableWidget" */;
+			buildPhases = (
+				9C5B61AF36C83B68854BB6E8 /* Sources */,
+				398F0BA23E8352D1B6B8590B /* Frameworks */,
+				795566E64E7575D6C8FADB56 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BooksTableWidget;
+			productName = BooksTableWidget;
+			productReference = E78859176CAFE39D59FD01AF /* BooksTableWidget.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -133,6 +229,7 @@
 			projectRoot = "";
 			targets = (
 				504EC3031FED79650016851F /* App */,
+				D65AE6A710D7A4D474B95199 /* BooksTableWidget */,
 			);
 		};
 /* End PBXProject section */
@@ -151,6 +248,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		795566E64E7575D6C8FADB56 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -160,10 +264,30 @@
 			files = (
 				504EC3081FED79650016851F /* AppDelegate.swift in Sources */,
 				9582B6832FE993A70072D4E8 /* SceneDelegate.swift in Sources */,
+				8B1E7772A0CAE742F7D75B39 /* WidgetBridge.swift in Sources */,
+				661DEA6E99FDEAEEB592E3E5 /* MainViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9C5B61AF36C83B68854BB6E8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A60D44724014D727C6405108 /* Snapshot.swift in Sources */,
+				3122AFD84CAEFACD8C5B74CF /* BooksTableWidget.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E0FAFC045882629E401DC083 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = BooksTableWidget;
+			target = D65AE6A710D7A4D474B95199 /* BooksTableWidget */;
+			targetProxy = 3F62703A323DC98D9B5EE486 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		504EC30B1FED79650016851F /* Main.storyboard */ = {
@@ -185,6 +309,27 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		35503A60D8B8BBEC680F9C03 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_ENTITLEMENTS = BooksTableWidget/BooksTableWidget.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 742H5JJX37;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = BooksTableWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mrwd.bookstable.widget;
+				PRODUCT_NAME = BooksTableWidget;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
 		504EC3141FED79650016851F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 958DCC722DB07C7200EA8C5F /* debug.xcconfig */;
@@ -299,8 +444,10 @@
 			baseConfigurationReference = 958DCC722DB07C7200EA8C5F /* debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = App/App.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 742H5JJX37;
 				INFOPLIST_FILE = App/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -321,8 +468,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = App/App.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 742H5JJX37;
 				INFOPLIST_FILE = App/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -338,9 +487,40 @@
 			};
 			name = Release;
 		};
+		91F7C3CF3EFB36E024959009 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_ENTITLEMENTS = BooksTableWidget/BooksTableWidget.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 742H5JJX37;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = BooksTableWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mrwd.bookstable.widget;
+				PRODUCT_NAME = BooksTableWidget;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		1AB497AAEC8B0B4B64D954E4 /* Build configuration list for PBXNativeTarget "BooksTableWidget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				91F7C3CF3EFB36E024959009 /* Release */,
+				35503A60D8B8BBEC680F9C03 /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		504EC2FF1FED79650016851F /* Build configuration list for PBXProject "App" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
