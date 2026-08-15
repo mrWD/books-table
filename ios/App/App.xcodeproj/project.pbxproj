@@ -20,7 +20,9 @@
 		661DEA6E99FDEAEEB592E3E5 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E54B4550B9A8C6D6C6783E /* MainViewController.swift */; };
 		8B1E7772A0CAE742F7D75B39 /* WidgetBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7423D01139F932A523FDF9 /* WidgetBridge.swift */; };
 		9582B6832FE993A70072D4E8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9582B6822FE993A50072D4E8 /* SceneDelegate.swift */; };
+		9E254E0D47B136B3D5727B22 /* AIBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C27811A6B74C5F49972FA32 /* AIBridge.swift */; };
 		A60D44724014D727C6405108 /* Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC00F8AAAC4325DF936BDFC6 /* Snapshot.swift */; };
+		A9FFF0B85853434C107C6D49 /* TranslateBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1E366244330C6F7DFB7CF25 /* TranslateBridge.swift */; };
 		D1C84E700BB24EC7716F5914 /* BooksTableWidget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = E78859176CAFE39D59FD01AF /* BooksTableWidget.appex */; };
 /* End PBXBuildFile section */
 
@@ -61,9 +63,11 @@
 		63E54B4550B9A8C6D6C6783E /* MainViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		9582B6822FE993A50072D4E8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		958DCC722DB07C7200EA8C5F /* debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = debug.xcconfig; path = ../debug.xcconfig; sourceTree = SOURCE_ROOT; };
+		9C27811A6B74C5F49972FA32 /* AIBridge.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AIBridge.swift; sourceTree = "<group>"; };
 		AE06067F945464DAF1CE6525 /* BooksTableWidget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BooksTableWidget.swift; sourceTree = "<group>"; };
 		BC89B6EC0D06CED12FF01360 /* App.entitlements */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.entitlements; name = App.entitlements; path = App/App.entitlements; sourceTree = "<group>"; };
 		BE7423D01139F932A523FDF9 /* WidgetBridge.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WidgetBridge.swift; sourceTree = "<group>"; };
+		C1E366244330C6F7DFB7CF25 /* TranslateBridge.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TranslateBridge.swift; sourceTree = "<group>"; };
 		CC00F8AAAC4325DF936BDFC6 /* Snapshot.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Snapshot.swift; sourceTree = "<group>"; };
 		E777247A8909792F511F6979 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		E78859176CAFE39D59FD01AF /* BooksTableWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = BooksTableWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -150,6 +154,8 @@
 				BE7423D01139F932A523FDF9 /* WidgetBridge.swift */,
 				63E54B4550B9A8C6D6C6783E /* MainViewController.swift */,
 				BC89B6EC0D06CED12FF01360 /* App.entitlements */,
+				9C27811A6B74C5F49972FA32 /* AIBridge.swift */,
+				C1E366244330C6F7DFB7CF25 /* TranslateBridge.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -266,6 +272,8 @@
 				9582B6832FE993A70072D4E8 /* SceneDelegate.swift in Sources */,
 				8B1E7772A0CAE742F7D75B39 /* WidgetBridge.swift in Sources */,
 				661DEA6E99FDEAEEB592E3E5 /* MainViewController.swift in Sources */,
+				9E254E0D47B136B3D5727B22 /* AIBridge.swift in Sources */,
+				A9FFF0B85853434C107C6D49 /* TranslateBridge.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

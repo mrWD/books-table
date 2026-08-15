@@ -1,3 +1,4 @@
+import { Translated } from '../components/Translated'
 import { useEffect, useState } from 'react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import type { BookSummary } from '../lib/types'
@@ -356,12 +357,11 @@ export default function BookDetailPage() {
         )}
 
         {book.description && (
-          <p
+          <Translated
+            text={book.description}
             className={`detail-about${expandAbout ? ' open' : ''}`}
             onClick={() => setExpandAbout(!expandAbout)}
-          >
-            {book.description}
-          </p>
+          />
         )}
 
         <ReadOnline id={id} iaId={book.iaId} />
