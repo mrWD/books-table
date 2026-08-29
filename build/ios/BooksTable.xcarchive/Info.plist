@@ -15,7 +15,7 @@
 		<key>CFBundleShortVersionString</key>
 		<string>1.0</string>
 		<key>CFBundleVersion</key>
-		<string>1</string>
+		<string>2</string>
 		<key>SigningIdentity</key>
 		<string>Apple Development: Viktor Lavrov (F2H9WZKZFM)</string>
 		<key>Team</key>
@@ -24,7 +24,7 @@
 	<key>ArchiveVersion</key>
 	<integer>2</integer>
 	<key>CreationDate</key>
-	<date>2026-08-29T16:16:11Z</date>
+	<date>2026-08-29T16:27:45Z</date>
 	<key>Name</key>
 	<string>App</string>
 	<key>SchemeName</key>

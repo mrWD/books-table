@@ -6,15 +6,15 @@
 	<dict>
 		<key>AppIcon60x60@2x.png</key>
 		<data>
-		yfd1hoJhT7ctVMqJMbFcVnzW2d4=
+		2sS9rk/Fh4mrkuxMAfHx5YMKuwA=
 		</data>
 		<key>AppIcon76x76@2x~ipad.png</key>
 		<data>
-		mUp8X9cmaoavRJe2i26B7BURR78=
+		uuXEpm3qJzJG+KyCbmGm7IXASuc=
 		</data>
 		<key>Assets.car</key>
 		<data>
-		9vGa5rW+a6NMaUnvyV01dFGn0SA=
+		pLZWbBg4LQxDiPWUwdBxRlemFh0=
 		</data>
 		<key>Base.lproj/LaunchScreen.storyboardc/01J-lp-oVM-view-snD-IY-ifK.nib</key>
 		<data>
@@ -38,7 +38,7 @@
 		</data>
 		<key>Frameworks/Capacitor.framework/Capacitor</key>
 		<data>
-		o0JhGHXQKMy+H2NYyEJ4sxBnIic=
+		b3y6SfEARZK96PKTI29mWqCephc=
 		</data>
 		<key>Frameworks/Capacitor.framework/Info.plist</key>
 		<data>
@@ -58,7 +58,7 @@
 		</data>
 		<key>Frameworks/Cordova.framework/Cordova</key>
 		<data>
-		lVkwqLlUCacWjhBNFQqWS728dDs=
+		PaPv7fEgBn5eYQs/eEV7jAIHRS4=
 		</data>
 		<key>Frameworks/Cordova.framework/Info.plist</key>
 		<data>
@@ -74,7 +74,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		pvclir1raWEpT6MOQ7ZNv0oJnQE=
+		q8sEWR44Gd4CD9FtRHP5xaZgbL4=
 		</data>
 		<key>PkgInfo</key>
 		<data>
@@ -82,15 +82,15 @@
 		</data>
 		<key>PlugIns/BooksTableWidget.appex/BooksTableWidget</key>
 		<data>
-		hryLAfnjNvqSXgWHgLIDRWPucZM=
+		16kFYtZvM8rDZVwxqVrgu6Vcsk4=
 		</data>
 		<key>PlugIns/BooksTableWidget.appex/Info.plist</key>
 		<data>
-		ocf0TMbiH/7d5neaojhnVTesA9A=
+		5FcxflEPzG8ZI5aZKkBjOsZyAgM=
 		</data>
 		<key>PlugIns/BooksTableWidget.appex/_CodeSignature/CodeResources</key>
 		<data>
-		AcAFA2FlxGm3NnOGTkCLqHMaaQY=
+		/ZX8jmA7Ruh+OilOGjQGuGhpr1M=
 		</data>
 		<key>PlugIns/BooksTableWidget.appex/embedded.mobileprovision</key>
 		<data>
@@ -112,37 +112,37 @@
 		<data>
 		2jmj7l5rSw0yVb/vlWAYkK/YBwk=
 		</data>
-		<key>public/assets/index-B1WE6fLZ.js</key>
+		<key>public/assets/index-CQu2emIC.js</key>
 		<data>
-		eXVhoiMAhjv7coENNpukAul3r70=
+		piPkhbOh2x8DRnGPidbEzRM5mqg=
 		</data>
 		<key>public/assets/index-DeMX8uTN.css</key>
 		<data>
 		uu8LhBSgM3mfVGdtbB3O0q24fRE=
 		</data>
-		<key>public/assets/web-BKMyMcRN.js</key>
+		<key>public/assets/web-5eKouE8G.js</key>
 		<data>
-		XN9Q+dkMK8SH7eRUC7P4BuAJ6vQ=
+		+heamNS+bSO8nZH2CSg5ZYnvU8M=
 		</data>
-		<key>public/assets/web-D_dWm-bf.js</key>
+		<key>public/assets/web-BTM_ZuAD.js</key>
 		<data>
-		Rc9amFAcABdl6snFIfPLgTPMNwg=
+		aO3NTcJTgTm4lytKRmNi6rJlOJ0=
 		</data>
-		<key>public/assets/web-Dl2SCU3G.js</key>
+		<key>public/assets/web-BYWc8XWp.js</key>
 		<data>
-		2Jr27GiZV2ES5oVRcxbks336UoE=
+		scDxi6nVcOzkN0PvZkbWclxfUV0=
 		</data>
-		<key>public/assets/web-Dq480uQ3.js</key>
+		<key>public/assets/web-DT1TCN2K.js</key>
 		<data>
-		/DU4dNwRGJhlVwfNZOkrbUuoWD0=
+		hrMcvqMnq4LRqGGThF7NIZPv1SQ=
 		</data>
-		<key>public/assets/web-Dtpe25af.js</key>
+		<key>public/assets/web-Df0HhjFS.js</key>
 		<data>
-		gpTMEkOoRMlE8xuMUro43CXmd0E=
+		0ZzMT58feaHlnfjlb4q0qcDaa+U=
 		</data>
-		<key>public/assets/web-F5WoPV38.js</key>
+		<key>public/assets/web-DoN7RBSM.js</key>
 		<data>
-		WrzSf+Kg0RV/462vZwUNlMmoWOM=
+		UW0+wkoJTvHkOp4PC539eI/RQms=
 		</data>
 		<key>public/assets/workbox-window.prod.es5-Bd17z0YL.js</key>
 		<data>
@@ -178,7 +178,7 @@
 		</data>
 		<key>public/index.html</key>
 		<data>
-		yYOXugCPHyricx3qIjnwJanVQJ8=
+		+2Swy/z+gW2ZHVo2TjXIAGKX3Es=
 		</data>
 		<key>public/manifest.webmanifest</key>
 		<data>
@@ -199,21 +199,21 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			20pifVIVSdx1uRMBp0RqopLHZLqNvWrYMddFd7t63OE=
+			F3TRXKycD1O61Nf/EAGGlwOtBE7GygOW01qs7DlxUmk=
 			</data>
 		</dict>
 		<key>AppIcon76x76@2x~ipad.png</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			7in5uEYFxq8cDgoUy0O4PgbUO8S/ZqYp1DiNXOHCzok=
+			l2ACkNoqLWBPSiUEFvT222ca1Wi2rOK15E5kA8vnoRQ=
 			</data>
 		</dict>
 		<key>Assets.car</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			OKqx0OmrTgx+cgBbejY62K5gGUGlQ1CH0TsFRGkvLpc=
+			hLHVoqYi6FHg0TR07iKejk9SukcJ9X3TmWEFO2puk08=
 			</data>
 		</dict>
 		<key>Base.lproj/LaunchScreen.storyboardc/01J-lp-oVM-view-snD-IY-ifK.nib</key>
@@ -255,7 +255,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			WYl4RsFFyf68HPEK+Pk0gLqgNXGqJBveBCnRPy/OPXc=
+			S5+iRKp8yw0COHdXEHGhX4tTJFJpvEHVH3gJiRiRsDI=
 			</data>
 		</dict>
 		<key>Frameworks/Capacitor.framework/Info.plist</key>
@@ -290,7 +290,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			c2kYaAKFC72XWbYw7UaQHclwtrkii3z03oB5rT2JD6Q=
+			WlsnAUKmBXiHZLBMT8mhOJECHeXsQS3i4BSJMsTucHI=
 			</data>
 		</dict>
 		<key>Frameworks/Cordova.framework/Info.plist</key>
@@ -318,21 +318,21 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			YjsQgrAWVhHYWSJz0GyMdf7rsh3ly7iPCRIBJTcJ8Es=
+			DGHFwY2SHHmdSeWiyk4mT22RGrT9pzXzzuqZ9Zb6BfI=
 			</data>
 		</dict>
 		<key>PlugIns/BooksTableWidget.appex/Info.plist</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			61X5ipcSFFdclLmOCHQBOqqUlbdCa6lCbb86fFjMtfs=
+			ZwrihKxUMdp9KbIGSS1OX96pMV94Sww0I70+ipmquzY=
 			</data>
 		</dict>
 		<key>PlugIns/BooksTableWidget.appex/_CodeSignature/CodeResources</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			0Y4329X2odpYMSngv6t2z/zM1rchZteLL106OlpMy0k=
+			QjvmOMtrcvDRvfL3sILH3HtXIXTTyYXEEbCPhcoPzdY=
 			</data>
 		</dict>
 		<key>PlugIns/BooksTableWidget.appex/embedded.mobileprovision</key>
@@ -370,11 +370,11 @@
 			47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=
 			</data>
 		</dict>
-		<key>public/assets/index-B1WE6fLZ.js</key>
+		<key>public/assets/index-CQu2emIC.js</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			jb/Xh9y5YbDPMsZsMFVJMrpTzIPZVMZq0sw8oj+lmiQ=
+			eLPTxBo/ATJvViH6Gtx6CCdkCPg9xlFf+auPypt9Asw=
 			</data>
 		</dict>
 		<key>public/assets/index-DeMX8uTN.css</key>
@@ -384,46 +384,46 @@
 			rwaJnoZ3A74x3bHuUhaFdhnsxjTO4vbaBY50rWFOcUc=
 			</data>
 		</dict>
-		<key>public/assets/web-BKMyMcRN.js</key>
+		<key>public/assets/web-5eKouE8G.js</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			RZk8xw5fcylFWwvdZg/UsNXpcm+9lqWOH3ZRgQOE2Ec=
+			He3GKR/oVtJj+J1NHR0sJiKHIP5/LP9joZJi5xjX5ro=
 			</data>
 		</dict>
-		<key>public/assets/web-D_dWm-bf.js</key>
+		<key>public/assets/web-BTM_ZuAD.js</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			jnmmzNryJINOkAJMFfnc5Jy6vXtUBIweWTazSGN7MKk=
+			+LGbuzqlEQbJZusUEtjRQgy/sAAJlznabCoc+4xeIq8=
 			</data>
 		</dict>
-		<key>public/assets/web-Dl2SCU3G.js</key>
+		<key>public/assets/web-BYWc8XWp.js</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			ChvvtT3ZK4K5mU0IrENoNoCcDHbNgGzAI+bMLHkaFkM=
+			egBCtvTv9rpALri8wOsDXvUSY41IfpvjyebRqNgKw8Q=
 			</data>
 		</dict>
-		<key>public/assets/web-Dq480uQ3.js</key>
+		<key>public/assets/web-DT1TCN2K.js</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			mwSZvjnGdrw6yz7phdyTACAAVBFGM0QmBoszFlpJWo8=
+			yoL+DkuIzqj3FK7PGPqPFVw+9i6YJQwmxxRRJdKFugI=
 			</data>
 		</dict>
-		<key>public/assets/web-Dtpe25af.js</key>
+		<key>public/assets/web-Df0HhjFS.js</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			slPEcuwGyUr1Wv0C4B5vKO2DLOkXWzVGi1uWE0ggU8U=
+			w0Nnc7fnrozabXV0OVAB6cWvLiTmJk9P8GJ/I3bgoCI=
 			</data>
 		</dict>
-		<key>public/assets/web-F5WoPV38.js</key>
+		<key>public/assets/web-DoN7RBSM.js</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			yJFn0umAiTY+t0bB6v5LSKNqYg0b4WcNVvI42AIDEZs=
+			HBA3BlaA7jtxvI6RCIhrXievpHhTtt51YIbkj0UjJaY=
 			</data>
 		</dict>
 		<key>public/assets/workbox-window.prod.es5-Bd17z0YL.js</key>
@@ -486,7 +486,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			FdbJM0QP69C9aLtJvbxfIjNnzcqZ3734YfPHM/TUuA4=
+			t2sn3pFuF9QAsXfoNbMuwIoqo3n5VOf0oY1FVATy8W0=
 			</data>
 		</dict>
 		<key>public/manifest.webmanifest</key>
