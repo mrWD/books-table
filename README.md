@@ -1,14 +1,21 @@
 # BooksTable
 
-**→ [books-table-six.vercel.app](https://books-table-six.vercel.app/)** ·
-mirror: [mrwd.github.io/books-table](https://mrwd.github.io/books-table/)
+A personal reading tracker: what you are reading, what page you are on, what
+comes next. Runs on the web, iPhone and Android from one codebase, and keeps
+your library on the device. No backend, no account, no API key.
 
-A personal reading tracker. It runs on **Android, iPhone and the web** from a
-single codebase (a PWA), **with no backend for your data**: the library is stored
-on the device and book metadata comes from Open Library.
+**Try it:** [live app](https://books-table-six.vercel.app/) ·
+[iOS beta on TestFlight](https://testflight.apple.com/join/554r8QcA) ·
+[GitHub Pages mirror](https://mrwd.github.io/books-table/) ·
+[product page](https://mrwd.github.io/products/books-table/)
 
-Built on the same skeleton as [FilmTable](https://github.com/mrWD/film-table) —
-same stack, same local-first principles, a different domain.
+<img src="docs/readme/books-table.png" alt="The Library screen: Reading tab with Continue, Not Started and Been a While groups, each card showing the page position and a +10 button" width="414">
+
+Book metadata comes from Open Library. Built on the same skeleton as
+[FilmTable](https://github.com/mrWD/film-table) and
+[GamesTable](https://github.com/mrWD/games-table): same stack, same local-first
+principles, a different domain. The platform code the three share (storage,
+native bridges, backups) lives in [tables-core](https://github.com/mrWD/tables-core).
 
 ## Features
 
@@ -36,6 +43,31 @@ same stack, same local-first principles, a different domain.
   flash of a light background at startup.
 - **PWA** — installs to the home screen and works offline (service worker).
 
+## Native apps
+
+The same build ships as a Capacitor app for iOS and Android. On top of the web
+features, the iOS app has:
+
+- **Home-screen widgets**: Reading and To read, fed by a snapshot the app
+  writes into a shared App Group (`ios/App/BooksTableWidget`). The widget uses
+  the same progress helpers as the shelves, so the numbers never disagree.
+- **Translate the description**: Open Library publishes in English only. On
+  iOS 17.4+ the book page can translate the description with Apple's on-device
+  Translation framework; the original stays one tap away, because translation
+  mangles proper nouns.
+- **One reminder, not a feed**: if the app has not been opened for three days
+  and a book is mid-read, one evening notification says so. Daily readers never
+  see it.
+- **Backups**: the JSON backup goes through the system share sheet, so it can
+  land in Files, iCloud or a message.
+
+The bridge to Apple's on-device language model (`ios/App/App/AIBridge.swift`)
+is ported from FilmTable and wired up, but no feature uses it here yet.
+
+Nothing in the native app sends your library anywhere either. iOS is in open
+TestFlight; the App Store and Google Play listings are not published yet
+(the drafts are in [docs/STORE.md](docs/STORE.md)).
+
 ## Data
 
 | Source | What | Key |
@@ -60,9 +92,12 @@ Measured against the live API while building:
   key it answers **HTTP 429** with `quota_limit_value: "0"`, so it would need a
   key and therefore a server.
 
-User data lives only in the device's `localStorage` (`bookstable-library-v1` /
-`bookstable-cache-v1`). There is no sync between devices — move your library via
-Profile → Export/Import.
+User data lives only on the device: IndexedDB (`bookstable-kv`) in a browser, a
+JSON file in the app's private storage in the native apps, where the OS cannot
+reclaim it as site data. Small preferences stay in `localStorage`. There is no
+sync between devices — move your library via Profile → Export/Import. The
+details, and the one-way migration from the old `localStorage` library, are in
+[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 
 ## Running locally
 
@@ -80,6 +115,12 @@ npm run build
 `npm run preview` serves the build on <http://localhost:4173>, and
 `node scripts/gen-icons.mjs` regenerates the PNG icons from `public/favicon.svg`.
 
+Native shells: `npm run build:native` builds with the native flag, then
+`npx cap sync` copies the result into `ios/` and `android/`.
+`scripts/release-ios.sh <build-number>` archives and exports a signed `.ipa`;
+what it does and where a person has to take over is in
+[docs/RELEASE-IOS.md](docs/RELEASE-IOS.md).
+
 ## Deployment
 
 Static files only — routing is hash-based, so no SPA fallback is needed and the
@@ -96,11 +137,15 @@ identifier. Everywhere else the component is inert.
 ## Layout
 
 ```
-src/lib/        types, the Open Library client, subject vocabulary, formatting
+src/lib/        types, the Open Library client, subject vocabulary, formatting,
+                and the native bridges: widget, translate, reminders, ai
 src/store/      zustand: library and cache (persist), explore, recommend, theme, ui
                 selectors.ts — all derived logic as pure functions
 src/components/ icons, UI primitives, cards
 src/pages/      Library / Explore / BookDetail / Profile / Insights
+ios/            Capacitor iOS project, Swift bridges and the widget extension
+android/        Capacitor Android project
+scripts/        icon generation, iOS release, widget target setup
 ```
 
 ## Documentation
@@ -110,6 +155,8 @@ src/pages/      Library / Explore / BookDetail / Profile / Insights
 | [CLAUDE.md](CLAUDE.md) | project context, principles, how to verify |
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | data model, progress rules, flows |
 | [docs/DATA-SOURCES.md](docs/DATA-SOURCES.md) | Open Library's quirks, confirmed by measurement |
+| [docs/RELEASE-IOS.md](docs/RELEASE-IOS.md) | building and uploading the iOS app, and the traps |
+| [docs/STORE.md](docs/STORE.md) | store listing drafts and screenshots |
 
 ## Licence
 

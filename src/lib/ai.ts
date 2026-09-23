@@ -7,7 +7,8 @@ import { isNativeApp } from 'tables-core'
  * Everything here runs on the phone; nothing is sent anywhere. What the model is asked
  * to do is deliberately narrow — read text this app already has and rephrase it. It is
  * never asked what it knows, because a model this size answers that question with
- * confident invention. Measurements behind that rule are in `docs/DECISIONS.md`.
+ * confident invention. Measurements behind that rule are in FilmTable, where the bridge came from:
+ * https://github.com/mrWD/film-table/blob/main/docs/DECISIONS.md
  */
 
 interface AIBridgePlugin {
