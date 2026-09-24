@@ -7,6 +7,7 @@ import ProfilePage from './pages/ProfilePage'
 import InsightsPage from './pages/InsightsPage'
 import { BottomNav, ChoiceHost, ConfirmHost, ScrollToTop, ToastHost } from './components/ui'
 import { SupportFab } from './components/Support'
+import { donationsHidden } from './lib/from-app'
 import { InstallHint } from './components/InstallHint'
 import { Analytics } from './components/Analytics'
 import { rescheduleReadingReminder } from './lib/reminders'
@@ -74,7 +75,8 @@ function Shell() {
         <Route path="*" element={<Navigate to="/library/reading" replace />} />
       </Routes>
       <BottomNav />
-      <SupportFab />
+      {/* App Store 3.1.1: no donation buttons inside the app — see lib/from-app. */}
+      {!donationsHidden() && <SupportFab />}
       <ToastHost />
       <ConfirmHost />
       <ChoiceHost />
