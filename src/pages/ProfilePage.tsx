@@ -9,11 +9,13 @@ import { useStats } from '../store/stats'
 import { YearReview } from '../components/YearReview'
 import { AutoBackup } from '../components/AutoBackup'
 import { SupportLinks } from '../components/Support'
+import { TipJar } from '../components/TipJar'
 import { Feedback } from '../components/Feedback'
 import { exportJsonFile, isNativeApp } from 'tables-core'
 import { useReminders } from '../store/reminders'
 import { native } from '../lib/native'
 import { donationsHidden, siteLink } from '../lib/from-app'
+import { tipsAvailable } from '../lib/tip-jar'
 import { formatBigDuration } from '../lib/format'
 import { Poster } from '../components/ui'
 import { IconDownload, IconTrash, IconUpload, IconUser } from '../components/Icons'
@@ -259,13 +261,15 @@ export default function ProfilePage() {
         <Feedback />
       </section>
 
-      {/* App Store 3.1.1: no donation buttons inside the app — see lib/from-app. */}
+      {/* App Store 3.1.1: no donation buttons inside the app — see lib/from-app. The iOS
+          app takes tips through In-App Purchase instead (lib/tip-jar). */}
       {!donationsHidden() && (
         <section>
           <h2 className="h2">Support</h2>
           <SupportLinks />
         </section>
       )}
+      {tipsAvailable() && <TipJar />}
 
       <section>
         <h2 className="h2">More from the author</h2>

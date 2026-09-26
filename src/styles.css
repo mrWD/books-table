@@ -1225,6 +1225,17 @@ img {
   color: var(--bg);
 }
 
+/* The iOS tip jar (components/TipJar): the same pills as the donation links, as
+   buttons, and a line under them for the outcome. */
+.support-link:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.support-note {
+  margin: 12px 0 0;
+}
+
 .datacard {
   background: var(--card);
   border-radius: 16px;

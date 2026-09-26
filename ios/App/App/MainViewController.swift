@@ -20,5 +20,6 @@ class MainViewController: CAPBridgeViewController {
         bridge?.registerPluginInstance(WidgetBridgePlugin())
         bridge?.registerPluginInstance(AIBridgePlugin())
         bridge?.registerPluginInstance(TranslateBridgePlugin())
+        bridge?.registerPluginInstance(TipJarBridgePlugin())
     }
 }
