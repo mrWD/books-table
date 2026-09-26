@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		15D73E3C839DD9D51F855DC0 /* TipJarBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2CFC6CC4E3CCEC107A71725 /* TipJarBridge.swift */; };
 		2840756421C3DA9A9EF66FF8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E777247A8909792F511F6979 /* Foundation.framework */; };
 		2FAD9763203C412B000D30F8 /* config.xml in Resources */ = {isa = PBXBuildFile; fileRef = 2FAD9762203C412B000D30F8 /* config.xml */; };
 		3122AFD84CAEFACD8C5B74CF /* BooksTableWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE06067F945464DAF1CE6525 /* BooksTableWidget.swift */; };
@@ -64,6 +65,7 @@
 		9582B6822FE993A50072D4E8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		958DCC722DB07C7200EA8C5F /* debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = debug.xcconfig; path = ../debug.xcconfig; sourceTree = SOURCE_ROOT; };
 		9C27811A6B74C5F49972FA32 /* AIBridge.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AIBridge.swift; sourceTree = "<group>"; };
+		A2CFC6CC4E3CCEC107A71725 /* TipJarBridge.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TipJarBridge.swift; sourceTree = "<group>"; };
 		AE06067F945464DAF1CE6525 /* BooksTableWidget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BooksTableWidget.swift; sourceTree = "<group>"; };
 		BC89B6EC0D06CED12FF01360 /* App.entitlements */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.entitlements; name = App.entitlements; path = App/App.entitlements; sourceTree = "<group>"; };
 		BE7423D01139F932A523FDF9 /* WidgetBridge.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WidgetBridge.swift; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 				BC89B6EC0D06CED12FF01360 /* App.entitlements */,
 				9C27811A6B74C5F49972FA32 /* AIBridge.swift */,
 				C1E366244330C6F7DFB7CF25 /* TranslateBridge.swift */,
+				A2CFC6CC4E3CCEC107A71725 /* TipJarBridge.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -274,6 +277,7 @@
 				661DEA6E99FDEAEEB592E3E5 /* MainViewController.swift in Sources */,
 				9E254E0D47B136B3D5727B22 /* AIBridge.swift in Sources */,
 				A9FFF0B85853434C107C6D49 /* TranslateBridge.swift in Sources */,
+				15D73E3C839DD9D51F855DC0 /* TipJarBridge.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
