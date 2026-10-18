@@ -299,8 +299,3 @@ export async function booksByAuthor(author: string, limit = 10): Promise<BookSum
 export function openLibraryUrl(id: string): string {
   return `${OL}/works/${id}`
 }
-
-/** Internet Archive serves the scan; borrowing or reading is decided on their side. */
-export function archiveUrl(iaId: string): string {
-  return `https://archive.org/details/${iaId}`
-}

@@ -18,6 +18,7 @@ import { donationsHidden, siteLink } from '../lib/from-app'
 import { tipsAvailable } from '../lib/tip-jar'
 import { formatBigDuration } from '../lib/format'
 import { Poster } from '../components/ui'
+import { Licenses } from '../components/Licenses'
 import { IconDownload, IconTrash, IconUpload, IconUser } from '../components/Icons'
 import type { ShelfStatus } from '../lib/types'
 
@@ -290,6 +291,7 @@ export default function ProfilePage() {
         </a>
         , a project of the Internet Archive
       </p>
+      <Licenses />
     </div>
   )
 }

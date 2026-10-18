@@ -106,6 +106,13 @@ Worth running:
   subjects endpoint returns the same classics for every genre.
 - **Google Books is not used.** Keyless it returns HTTP 429 with a zero quota, so
   it would require a key and therefore a server.
+- **No direct Internet Archive link (2026-10-18).** The book page used to offer "Read
+  or borrow at the Internet Archive", straight to the Archive's scan. Its lending of
+  in-copyright scans is what the publishers' lawsuit was about, and a store app linking
+  to those scans invites a takedown request; the Open Library work page decides for
+  itself what it offers. `iaId` is still stored, unused.
+- **Open-source licences** are listed from `public/licenses.txt`, which
+  `scripts/gen-licenses.mjs` writes on every build; Profile opens it in place.
 - **`scripts/gen-icons.mjs` uses `fileURLToPath`.** `URL.pathname` yields
   `/C:/…` on Windows and sharp cannot open it; the inherited version was
   macOS-only.

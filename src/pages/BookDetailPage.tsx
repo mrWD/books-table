@@ -364,7 +364,7 @@ export default function BookDetailPage() {
           />
         )}
 
-        <ReadOnline id={id} iaId={book.iaId} />
+        <ReadOnline id={id} />
 
         {!tracked && !book.description && (
           <p className="hint">No description on record for this book.</p>
