@@ -28,10 +28,20 @@ and the one-tap episode check-in became a one-tap page advance.
    The adapter is `createDeviceStorage` in `tables-core`, wired up in
    `lib/storage.ts` and `lib/native.ts`. No accounts, no sync, nothing personal
    collected. Unlike FilmTable there is not
-   even a proxy: Open Library needs no key. The single exception is
+   even a proxy: Open Library needs no key. One exception is
    `src/components/Analytics.tsx`: on a `.vercel.app` host it reports cookieless
    screen-view counts to Vercel Web Analytics — a screen name, never a title, a
    search term or an identifier.
+   **Anonymous usage counts are the other exception** (the owner's decision, 2026-10-28,
+   made to learn how many people use the apps before deciding on ads or tips):
+   `src/lib/metrics.ts` sends one ping a day to `mrwd-metrics.vercel.app` with counts of
+   named events and screen groups, error kinds, version, platform, UI language, local
+   date and cohort week. Never titles, search text, anything typed, error messages or
+   any ID. On by default; off in Profile ("Share anonymous usage statistics") stops it
+   and clears the counters; Global Privacy Control starts it off on the web. It follows
+   [app-metrics/docs/CLIENT.md](../../app-metrics/docs/CLIENT.md) (`~/Projects/app-metrics`)
+   to the letter — read that before changing an event, a field or the timing, and keep
+   `public/privacy.html` and `docs/STORE.md` in step.
 2. **The app must work without keys.** If a second source is ever added, it must
    not become a dependency — the keyless path has to keep working.
 3. **Its own visual identity.** Inherited from FilmTable, which was deliberately
@@ -72,6 +82,10 @@ Worth running:
 - the genre strip on Explore (the results must not be all public-domain
   classics — if they are, someone switched it back to `/subjects/`);
 - the hidden `/#/insights` page (usage counters, not linked from navigation);
+- the daily ping, against `node scripts/dev-server.mjs` in `~/Projects/app-metrics`:
+  `VITE_METRICS_URL=http://localhost:8787/api/ping` in `.env.development.local`, and the
+  dev server prints every body it gets (204 = accepted, 400 names the bad field). State
+  is `bookstable-metrics-v1` in localStorage; move `lastDay` back to send again;
 - both themes and **horizontal overflow**
   (`document.documentElement.scrollWidth` against `clientWidth` — must be 0;
   this already caught a CSS Grid bug in FilmTable);

@@ -3,6 +3,7 @@ import type { BookSummary } from '../lib/types'
 import { booksBySubject, searchBooks, trendingBooks, type SearchScope } from '../lib/api'
 import { BROWSE_SUBJECTS, type Subject } from '../lib/subjects'
 import { stats } from './stats'
+import { count } from '../lib/metrics'
 
 interface ExploreState {
   query: string
@@ -61,6 +62,7 @@ export const useExplore = create<ExploreState>((set, get) => ({
     }
     set({ searching: true, searchError: false })
     stats.search()
+    count('search')
     try {
       const results = await searchBooks(term, scope)
       if (seq === searchSeq) set({ results, searching: false })

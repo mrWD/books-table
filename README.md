@@ -134,6 +134,11 @@ On a `.vercel.app` host the app also reports cookieless screen-view counts to
 Vercel Web Analytics: a screen name, never a title, a search term or an
 identifier. Everywhere else the component is inert.
 
+Every build, native ones included, sends anonymous usage counts once a day
+(`src/lib/metrics.ts`): which screens and features were used, error kinds, version,
+platform and language — no IDs, titles or anything typed. It can be switched off in
+Profile, and Global Privacy Control starts it off on the web.
+
 ## Layout
 
 ```

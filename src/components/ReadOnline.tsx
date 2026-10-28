@@ -1,4 +1,5 @@
 import { openLibraryUrl } from '../lib/api'
+import { count } from '../lib/metrics'
 import { IconBook, IconChevronRight } from './Icons'
 
 /**
@@ -18,7 +19,13 @@ import { IconBook, IconChevronRight } from './Icons'
 export function ReadOnline({ id }: { id: string }) {
   return (
     <div className="watchlinks">
-      <a className="watchlink" href={openLibraryUrl(id)} target="_blank" rel="noreferrer">
+      <a
+        className="watchlink"
+        href={openLibraryUrl(id)}
+        target="_blank"
+        rel="noreferrer"
+        onClick={() => count('read_online_opened')}
+      >
         <IconBook size={18} strokeWidth={1.8} />
         <span className="watchlink-name">Editions and details on Open Library</span>
         <IconChevronRight size={16} strokeWidth={2.4} />

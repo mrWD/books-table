@@ -1,5 +1,6 @@
 import type { BookSummary } from './types'
 import { stats } from '../store/stats'
+import { countApiError } from './metrics'
 
 /**
  * Open Library is the whole catalogue layer: search, work details, covers, trending
@@ -63,8 +64,18 @@ export function withTimeout<T>(p: Promise<T>, ms: number, fallback: T): Promise<
 const REQUEST_TIMEOUT_MS = 8000
 
 async function getJson<T>(url: string): Promise<T> {
-  const res = await fetch(url, { signal: AbortSignal.timeout?.(REQUEST_TIMEOUT_MS) })
-  if (!res.ok) throw new Error(`HTTP ${res.status} for ${url}`)
+  let res: Response
+  try {
+    res = await fetch(url, { signal: AbortSignal.timeout?.(REQUEST_TIMEOUT_MS) })
+  } catch (err) {
+    countApiError('openlibrary')
+    throw err
+  }
+  if (!res.ok) {
+    // A 404 is an answer: a work or edition Open Library does not have.
+    if (res.status !== 404) countApiError('openlibrary')
+    throw new Error(`HTTP ${res.status} for ${url}`)
+  }
   return res.json() as Promise<T>
 }
 

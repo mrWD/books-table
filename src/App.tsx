@@ -9,6 +9,7 @@ import { BottomNav, ChoiceHost, ConfirmHost, ScrollToTop, ToastHost } from './co
 import { SupportFab } from './components/Support'
 import { donationsHidden } from './lib/from-app'
 import { InstallHint } from './components/InstallHint'
+import { MetricsNotice } from './components/MetricsNotice'
 import { Analytics } from './components/Analytics'
 import { rescheduleReadingReminder } from './lib/reminders'
 import { refreshWidgets } from './lib/widget'
@@ -17,6 +18,10 @@ import { refreshBooks } from './store/cache'
 import { useReminders } from './store/reminders'
 import { watchSystemTheme } from './store/theme'
 import { beginSessionOnce, useStats } from './store/stats'
+import { count } from './lib/metrics'
+
+/** Route groups the daily ping may name — a fixed list, so a typed address never becomes one. */
+const SCREENS = new Set(['library', 'explore', 'book', 'profile', 'insights'])
 
 function Shell() {
   const location = useLocation()
@@ -55,12 +60,14 @@ function Shell() {
         ? '/library'
         : path
     useStats.getState().recordRoute(key)
+    if (SCREENS.has(key.slice(1))) count(`screen_${key.slice(1)}`)
   }, [location.pathname])
 
   return (
     <div className={`app${isDetail ? ' on-detail' : ''}`}>
       <ScrollToTop />
       <InstallHint />
+      <MetricsNotice />
       <Routes>
         <Route path="/" element={<Navigate to="/library/reading" replace />} />
         <Route path="/library" element={<LibraryPage />} />

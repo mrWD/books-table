@@ -5,6 +5,7 @@ import { canonicalSubjects, type Subject } from '../lib/subjects'
 import { useBookCache } from './cache'
 import { useLibrary } from './library'
 import { useStats } from './stats'
+import { count } from '../lib/metrics'
 
 /**
  * Recommendations are computed on the device from the library the person already has.
@@ -130,6 +131,7 @@ export const useRecommend = create<RecommendState>((set, get) => ({
       }
 
       useStats.getState().recordRecommendations(items.length)
+      count('recommendations_loaded')
       set({ items, loading: false, loadedAt: Date.now() })
     } catch (err) {
       console.warn('recommendations failed', err)
