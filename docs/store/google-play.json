@@ -1,0 +1,36 @@
+{
+  "packageName": "com.mrwd.bookstable",
+  "defaultLanguage": "en-US",
+  "title": "BooksTable",
+  "shortDescription": "A reading tracker: one tap logs your pages. No account, works offline.",
+  "fullDescription": "BooksTable keeps track of what you read, page by page, with one tap.\n\n• Add 10 pages straight from the card, or type the exact page when you want to\n• Reading, want to read, finished and paused shelves, with counts\n• Reading sessions merge into sittings, so the stats mean something: pages this year, time spent reading\n• A gentle reminder after three quiet days, scheduled on your device\n• Every book links to its editions and details on Open Library\n\nNo account, no sign-up. Your library stays on your device, and you can export it to a single file and import it back whenever you like.\n\nOnce a day the app sends anonymous usage counts: which screens and features were used, kinds of errors, the app version, platform and language. No IDs, no titles, nothing you type. You can turn it off in Profile.\n\nBook data and covers come from Open Library, a project of the Internet Archive.",
+  "category": "BOOKS_AND_REFERENCE",
+  "contactEmail": "lvigtor@gmail.com",
+  "website": "https://mrwd.github.io/products/books-table/",
+  "privacyPolicyUrl": "https://books-table-six.vercel.app/privacy.html",
+  "containsAds": false,
+  "financialFeatures": "none",
+  "dataSafety": {
+    "collected": [
+      {
+        "category": "App activity › App interactions",
+        "shared": false,
+        "optional": true,
+        "purposes": [
+          "Analytics"
+        ]
+      },
+      {
+        "category": "App info and performance › Diagnostics",
+        "shared": false,
+        "optional": true,
+        "purposes": [
+          "Analytics"
+        ]
+      }
+    ],
+    "encryptedInTransit": true,
+    "deletionRequest": "Nothing is linked to a user, so there is nothing to delete on request. Turning the switch off deletes the unsent counts on the device."
+  },
+  "contentRating": "Everyone 10+"
+}
